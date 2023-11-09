@@ -59,7 +59,13 @@ public class InputView {
     }
 
     private static String[] getMenus() {
-        String[] line = Console.readLine().split(",");
-        return line;
+        String line = Console.readLine();
+        validateLine(line);
+        String[] lines = line.split(",");
+        return lines;
+    }
+
+    private static void validateLine(String line) {
+        if("".equals(line)) throw new IllegalArgumentException();
     }
 }
