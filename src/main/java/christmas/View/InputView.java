@@ -45,12 +45,22 @@ public class InputView {
             try {
                 printMenusInstruction();
                 String[] menus = getMenus();
+                validateMenus(menus);
                 break;
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_COUNT_HAS_TO_BE_NUMBER);
             } catch (IllegalArgumentException e) {
                 System.out.println(ERROR_NOT_VALID_MENUS);
             }
+        }
+    }
+
+    private static void validateMenus(String[] menus) {
+        for(String menu : menus){
+            if(!menu.matches("^[가-힣]+-[0-9]+$")){
+                throw new IllegalArgumentException();
+            }
+
         }
     }
 
