@@ -6,6 +6,7 @@ public class InputView {
     private static final String ERROR_VISIT_DATE_ONE_THIRTYONE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     private static final String ERROR_VISIT_DATE_IS_NUMBER = "[ERROR] 방문일자는 숫자여야 합니다.";
     private static final String ENTER_VISIT_DATE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
+    private static final String ENTER_MENUS = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
     public static Integer readDate() {
         int date;
         while (true) {
@@ -38,7 +39,12 @@ public class InputView {
     }
 
     public static void readMenu() {
+        printMenusInstruction();
         String[] menus = getMenus();
+    }
+
+    private static void printMenusInstruction() {
+        System.out.println(ENTER_MENUS);
     }
 
     private static String[] getMenus() {
