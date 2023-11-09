@@ -36,4 +36,13 @@ public class InputView {
     private static int getVisitDate() {
         return Integer.parseInt(Console.readLine());
     }
+
+    public static void readMenu() {
+        String[] menus = getMenus();
+    }
+
+    private static String[] getMenus() {
+        String[] line = Console.readLine().split(",");
+        return line;
+    }
 }

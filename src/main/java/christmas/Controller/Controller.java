@@ -13,4 +13,10 @@ public class Controller {
     public static void makeVisitDate() {
         Integer date = InputView.readDate();
     }
+
+    public static void makeMenu() {
+        InputView.readMenu();
+
+
+    }
 }
