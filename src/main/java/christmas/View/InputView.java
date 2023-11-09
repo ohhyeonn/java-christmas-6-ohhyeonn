@@ -12,6 +12,7 @@ public class InputView {
             try {
                 printVisitDateInstruction();
                 date = getVisitDate();
+                validateVisitDate(date);
                 break;
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_VISIT_DATE_IS_NUMBER);
@@ -20,6 +21,12 @@ public class InputView {
             }
         }
         return date;
+    }
+
+    private static void validateVisitDate(int date) {
+        if (date <= 0 || date >= 32) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private static void printVisitDateInstruction() {
