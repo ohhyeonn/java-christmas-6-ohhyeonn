@@ -60,8 +60,13 @@ public class InputView {
             if(!menu.matches("^[가-힣]+-[0-9]+$")){
                 throw new IllegalArgumentException();
             }
-
+            int count = Integer.parseInt(menu.split("-")[1]);
+            validateCount(count);
         }
+    }
+
+    private static void validateCount(int count) {
+        if(count <= 0) throw new IllegalArgumentException();
     }
 
     private static void printMenusInstruction() {
