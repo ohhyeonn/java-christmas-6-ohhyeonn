@@ -1,6 +1,7 @@
 package christmas.View;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.Model.Menu;
 
 public class InputView {
     private static final String ERROR_VISIT_DATE_ONE_THIRTYONE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
@@ -44,8 +45,8 @@ public class InputView {
         while (true) {
             try {
                 printMenusInstruction();
-                String[] menus = getMenus();
-                validateMenus(menus);
+                String[] menusSets = getMenuSets();
+                validateMenuSets(menusSets);
                 break;
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_COUNT_HAS_TO_BE_NUMBER);
@@ -55,13 +56,21 @@ public class InputView {
         }
     }
 
-    private static void validateMenus(String[] menus) {
-        for(String menu : menus){
-            if(!menu.matches("^[가-힣]+-[0-9]+$")){
+    private static void validateMenuSets(String[] menuSets) {
+        for(String set : menuSets){
+            if(!set.matches("^[가-힣]+-[0-9]+$")){
                 throw new IllegalArgumentException();
             }
-            int count = Integer.parseInt(menu.split("-")[1]);
-            validateCount(count);
+            String[] menuAndCount = set.split("-");
+            validateMenu(menuAndCount[0]);
+            validateCount(Integer.parseInt(menuAndCount[1]));
+        }
+    }
+
+    private static void validateMenu(String menu) {
+        Menu menuName = Menu.getMenu(menu);
+        if(menuName == Menu.NONE){
+            throw new IllegalArgumentException();
         }
     }
 
@@ -73,7 +82,7 @@ public class InputView {
         System.out.println(ENTER_MENUS);
     }
 
-    private static String[] getMenus() {
+    private static String[] getMenuSets() {
         String line = Console.readLine();
         validateLine(line);
         String[] lines = line.split(",");
