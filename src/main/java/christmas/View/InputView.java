@@ -49,6 +49,7 @@ public class InputView {
                 String[] menusSets = getMenuSets();
                 validateMenuSets(menusSets);
                 validateDuplicatedMenu(menusSets);
+                validateOnlyDrinkMenu(menusSets);
                 break;
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_COUNT_HAS_TO_BE_NUMBER);
@@ -56,6 +57,17 @@ public class InputView {
                 System.out.println(ERROR_NOT_VALID_MENUS);
             }
         }
+    }
+
+    private static void validateOnlyDrinkMenu(String[] menusSets) {
+        for(String set : menusSets){
+            String[] menuAndCount = set.split("-");
+            Menu menu = Menu.getMenu(menuAndCount[0]);
+            if(menu != Menu.ZERO_COLA && menu != Menu.RED_WINE && menu != Menu.CHAMPAGNE && menu != Menu.NONE){
+                return ;
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     private static void validateDuplicatedMenu(String[] menusSets) {
