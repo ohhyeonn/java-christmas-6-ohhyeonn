@@ -2,6 +2,7 @@ package christmas.View;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.Model.Menu;
+import java.util.ArrayList;
 
 public class InputView {
     private static final String ERROR_VISIT_DATE_ONE_THIRTYONE = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
@@ -47,12 +48,23 @@ public class InputView {
                 printMenusInstruction();
                 String[] menusSets = getMenuSets();
                 validateMenuSets(menusSets);
+                validateDuplicatedMenu(menusSets);
                 break;
             } catch (NumberFormatException e) {
                 System.out.println(ERROR_COUNT_HAS_TO_BE_NUMBER);
             } catch (IllegalArgumentException e) {
                 System.out.println(ERROR_NOT_VALID_MENUS);
             }
+        }
+    }
+
+    private static void validateDuplicatedMenu(String[] menusSets) {
+        ArrayList<String> basket = new ArrayList<>();
+        for(String set : menusSets){
+            String[] menuAndCount = set.split("-");
+            String menu = menuAndCount[0];
+            if(basket.contains(menu)) throw new IllegalArgumentException();
+            basket.add(menu);
         }
     }
 
