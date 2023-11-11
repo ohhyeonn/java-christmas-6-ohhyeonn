@@ -23,6 +23,8 @@ public class Controller {
     }
 
     public static void makeOrder(Integer date, String[] menus) {
+        OutputView.printEventIntro(date);
         Counter.countMenu(menus);
+        OutputView.printMenu();
     }
 }
