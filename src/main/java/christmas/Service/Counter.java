@@ -1,7 +1,7 @@
 package christmas.Service;
 
 import christmas.Model.Menu;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.Period;
 
 public class Counter {
@@ -36,9 +36,9 @@ public class Counter {
     }
 
     public static Integer countChristmasDiscount(Integer date) {
-        LocalDateTime christmasDate = LocalDateTime.of(2023 , 12 , 25 , 0,0,0);
-        LocalDateTime visitDate = LocalDateTime.of(2023 , 12 , date ,0 , 0 , 0);
-        Period diff = Period.between(visitDate.toLocalDate() , christmasDate.toLocalDate());
+        LocalDate christmasDate = LocalDate.of(2023,12,25);
+        LocalDate visitDate = LocalDate.of(2023,12,date);
+        Period diff = Period.between(visitDate , christmasDate);
         return calculateChristmasDiscount(diff.getDays());
     }
 
@@ -49,4 +49,5 @@ public class Counter {
         }
         return 0;
     }
+
 }
