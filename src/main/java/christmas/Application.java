@@ -15,5 +15,6 @@ public class Application {
         Integer weekDayDiscount = Controller.makeWeekDayDiscount(date);
         Integer weekendDiscount = Controller.makeWeekendDiscount(date);
         Integer specialDiscount = Controller.makeSpecialDiscount(date);
+        Controller.makeBenefitsDetails(giftMenuCount ,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);
     }
 }

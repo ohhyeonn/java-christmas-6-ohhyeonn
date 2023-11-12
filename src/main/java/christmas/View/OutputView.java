@@ -14,6 +14,12 @@ public class OutputView {
     private static final String GIFT_MENU = "<증정 메뉴>";
     private static final String CHAMPAGNE = "샴페인 ";
     private static final String NOTHING = "없음";
+    private static final String BENEFITS_LIST = "<혜택 내역>";
+    private static final String CHRISTMAS_D_DAY_DISCOUNT_FORMAT = "크리스마스 디데이 할인: %,d원\n";
+    private static final String WEEKDAY_DISCOUNT_FORMAT = "평일 할인: %,d원\n";
+    private static final String WEEKEND_DISCOUNT_FORMAT = "주말 할인: %,d원\n";
+    private static final String SPECIAL_DISCOUNT_FORMAT = "특별 할인: %,d원\n";
+    private static final String GIFT_EVENT_PRICE = "증정 이벤트: -25,000원";
     public static void printIntro() {
         System.out.println(INTRO);
     }
@@ -51,5 +57,61 @@ public class OutputView {
             return ;
         }
         System.out.println(NOTHING);
+    }
+
+    public static void printBenefitsDetails(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
+        printBenefitsList();
+        printChristmasDiscount(christmasDiscount);
+        printWeekDayDiscount(weekDayDiscount);
+        printWeekendDiscount(weekendDiscount);
+        printSpecialDiscount(specialDiscount);
+        printGiftEvent(giftMenuCount);
+        printBenefitsNothing(giftMenuCount, christmasDiscount, weekDayDiscount, weekendDiscount,
+                specialDiscount);
+
+
+    }
+
+    private static void printBenefitsList() {
+        System.out.println();
+        System.out.println(BENEFITS_LIST);
+    }
+
+    private static void printBenefitsNothing(Integer giftMenuCount, Integer christmasDiscount,
+            Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
+        if(christmasDiscount == 0 && weekDayDiscount == 0 && weekendDiscount == 0 && specialDiscount
+                == 0 && giftMenuCount == 0){
+            System.out.println(NOTHING);
+        }
+    }
+
+    private static void printGiftEvent(Integer giftMenuCount) {
+        if(giftMenuCount > 0){
+            System.out.println(GIFT_EVENT_PRICE);
+        }
+    }
+
+    private static void printSpecialDiscount(Integer specialDiscount) {
+        if(specialDiscount < 0){
+            System.out.printf(SPECIAL_DISCOUNT_FORMAT, specialDiscount);
+        }
+    }
+
+    private static void printWeekendDiscount(Integer weekendDiscount) {
+        if(weekendDiscount < 0){
+            System.out.printf(WEEKEND_DISCOUNT_FORMAT, weekendDiscount);
+        }
+    }
+
+    private static void printWeekDayDiscount(Integer weekDayDiscount) {
+        if(weekDayDiscount < 0){
+            System.out.printf(WEEKDAY_DISCOUNT_FORMAT, weekDayDiscount);
+        }
+    }
+
+    private static void printChristmasDiscount(Integer christmasDiscount) {
+        if(christmasDiscount < 0){
+            System.out.printf(CHRISTMAS_D_DAY_DISCOUNT_FORMAT, christmasDiscount);
+        }
     }
 }
