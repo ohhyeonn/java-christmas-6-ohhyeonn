@@ -21,6 +21,7 @@ public class OutputView {
     private static final String SPECIAL_DISCOUNT_FORMAT = "특별 할인: %,d원\n";
     private static final String GIFT_EVENT_PRICE = "증정 이벤트: -25,000원";
     private static final String BENEFITS_SUM_PRICE = "<총혜택 금액>";
+    private static final String ESTIMATED_PAYMENT_AMOUNT_AFTER_DISCOUNT = "<할인 후 예상 결제 금액>";
     public static void printIntro() {
         System.out.println(INTRO);
     }
@@ -124,5 +125,11 @@ public class OutputView {
             return;
         }
         System.out.println(NOTHING);
+    }
+
+    public static void printEstimatedPaymentAmountAfterDiscount(Integer estimatedPaymentAmountAfterDiscount) {
+        System.out.println();
+        System.out.println(ESTIMATED_PAYMENT_AMOUNT_AFTER_DISCOUNT);
+        System.out.printf(SUM_FORMAT, estimatedPaymentAmountAfterDiscount);
     }
 }

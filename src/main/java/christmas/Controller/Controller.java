@@ -64,13 +64,16 @@ public class Controller {
         OutputView.printBenefitsDetails(giftMenuCount,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);
     }
 
-    public static void makeBenefitsDiscount(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
+    public static Integer makeBenefitsDiscount(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
         Integer benefitsDiscount = Counter.countBenefitsDiscount(giftMenuCount, christmasDiscount, weekDayDiscount, weekendDiscount, specialDiscount);
         OutputView.printBenefitsDiscount(benefitsDiscount);
+        return benefitsDiscount;
     }
 
     public static void makeEstimatedPaymentAmountAfterDiscount(Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount,
             Integer specialDiscount, Integer lumpSumBeforeDiscount) {
         Integer estimatedPaymentAmountAfterDiscount = Counter.countEstimatedPaymentAmountAfterDiscount(christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount,lumpSumBeforeDiscount);
+        OutputView.printEstimatedPaymentAmountAfterDiscount(estimatedPaymentAmountAfterDiscount);
     }
+
 }
