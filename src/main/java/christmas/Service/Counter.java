@@ -91,4 +91,9 @@ public class Counter {
         }
         return weekendDiscount;
     }
+
+    public static Integer countSpecialDiscount(Integer date) {
+        if(date == 3 || date == 10 || date == 17 || date == 24 || date == 25 || date == 31) return -1000;
+        return 0;
+    }
 }

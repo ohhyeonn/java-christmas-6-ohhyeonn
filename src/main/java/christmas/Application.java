@@ -14,5 +14,6 @@ public class Application {
         Integer christmasDiscount = Controller.makeChristmasDiscount(date);
         Integer weekDayDiscount = Controller.makeWeekDayDiscount(date);
         Integer weekendDiscount = Controller.makeWeekendDiscount(date);
+        Integer specialDiscount = Controller.makeSpecialDiscount(date);
     }
 }

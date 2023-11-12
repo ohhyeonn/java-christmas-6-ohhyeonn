@@ -54,4 +54,9 @@ public class Controller {
         Integer weekendDiscount = Counter.countWeekendDiscount(date);
         return weekendDiscount;
     }
+
+    public static Integer makeSpecialDiscount(Integer date) {
+        Integer specialDiscount = Counter.countSpecialDiscount(date);
+        return specialDiscount;
+    }
 }
