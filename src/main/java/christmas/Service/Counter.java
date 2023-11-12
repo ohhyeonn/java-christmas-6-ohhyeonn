@@ -26,4 +26,11 @@ public class Counter {
         }
         return lumpSumBeforeDiscount;
     }
+
+    public static Integer countGiftMenu(Integer lumpSumBeforeDiscount) {
+        if(lumpSumBeforeDiscount >= 120000){
+            return 1;
+        }
+        return 0;
+    }
 }

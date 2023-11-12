@@ -28,8 +28,13 @@ public class Controller {
         OutputView.printMenu();
     }
 
-    public static void makeLumpSumBeforeDiscount() {
+    public static Integer makeLumpSumBeforeDiscount() {
         Integer LumpSumBeforeDiscount = Counter.countLumpSumBeforeDiscount();
         OutputView.printLumpSumBeforeDiscount(LumpSumBeforeDiscount);
+        return LumpSumBeforeDiscount;
+    }
+
+    public static void makeGiftMenu(Integer lumpSumBeforeDiscount) {
+        Integer giftMenuCount = Counter.countGiftMenu(lumpSumBeforeDiscount);
     }
 }
