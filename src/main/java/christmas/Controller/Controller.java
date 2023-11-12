@@ -30,6 +30,6 @@ public class Controller {
 
     public static void makeLumpSumBeforeDiscount() {
         Integer LumpSumBeforeDiscount = Counter.countLumpSumBeforeDiscount();
-
+        OutputView.printLumpSumBeforeDiscount(LumpSumBeforeDiscount);
     }
 }

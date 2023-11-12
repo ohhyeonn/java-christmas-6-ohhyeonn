@@ -9,6 +9,8 @@ public class OutputView {
     private static final String EVENT_INTRO = "일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!";
     private static final String BLANC = " ";
     private static final String COUNT = "개";
+    private static final String LUMP_SUM_BEFORE_DISCOUNT = "<할인 전 총주문 금액>";
+    private static final String LUMP_SUM_FORMAT = "%,d원\n";
     public static void printIntro() {
         System.out.println(INTRO);
     }
@@ -30,5 +32,11 @@ public class OutputView {
 
     public static void printEventIntro(Integer date) {
         System.out.println(DECEMBER+date+EVENT_INTRO );
+    }
+
+    public static void printLumpSumBeforeDiscount(Integer lumpSumBeforeDiscount) {
+        System.out.println();
+        System.out.println(LUMP_SUM_BEFORE_DISCOUNT);
+        System.out.printf(LUMP_SUM_FORMAT,lumpSumBeforeDiscount);
     }
 }
