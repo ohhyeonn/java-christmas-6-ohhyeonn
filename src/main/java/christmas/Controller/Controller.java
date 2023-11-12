@@ -34,8 +34,14 @@ public class Controller {
         return LumpSumBeforeDiscount;
     }
 
-    public static void makeGiftMenu(Integer lumpSumBeforeDiscount) {
+    public static Integer makeGiftMenu(Integer lumpSumBeforeDiscount) {
         Integer giftMenuCount = Counter.countGiftMenu(lumpSumBeforeDiscount);
         OutputView.printGiftMenu(giftMenuCount);
+        return giftMenuCount;
+    }
+
+    public static Integer makeChristmasDiscount(Integer date) {
+        Integer christmasDiscount = Counter.countChristmasDiscount(date);
+        return christmasDiscount;
     }
 }

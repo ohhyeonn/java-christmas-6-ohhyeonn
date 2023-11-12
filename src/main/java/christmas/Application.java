@@ -10,6 +10,8 @@ public class Application {
         String[] menus = Controller.makeMenu();
         Controller.makeOrder(date , menus);
         Integer lumpSumBeforeDiscount = Controller.makeLumpSumBeforeDiscount();
-        Controller.makeGiftMenu(lumpSumBeforeDiscount);
+        Integer giftMenuCount = Controller.makeGiftMenu(lumpSumBeforeDiscount);
+        Integer christmasDiscount = Controller.makeChristmasDiscount(date);
+
     }
 }
