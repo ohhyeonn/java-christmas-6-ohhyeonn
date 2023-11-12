@@ -44,4 +44,9 @@ public class Controller {
         Integer christmasDiscount = Counter.countChristmasDiscount(date);
         return christmasDiscount;
     }
+
+    public static Integer makeWeekDayDiscount(Integer date) {
+        Integer weekDayDiscount = Counter.countWeekDayDiscount(date);
+        return weekDayDiscount;
+    }
 }

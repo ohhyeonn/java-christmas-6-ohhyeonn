@@ -1,6 +1,7 @@
 package christmas.Service;
 
 import christmas.Model.Menu;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -50,4 +51,29 @@ public class Counter {
         return 0;
     }
 
+
+    public static Integer countWeekDayDiscount(Integer date) {
+        boolean isWeekDay = isWeekDay(date);
+        if(!isWeekDay){
+            return 0;
+        }
+
+        Integer weekDayDiscount = 0;
+        for(Menu menu : Menu.values()){
+            if(menu == Menu.CHOCOLATE_CAKE || menu == Menu.ICE_CREAM){
+                weekDayDiscount = weekDayDiscount - (2023 * menu.getCount());
+            }
+        }
+        return weekDayDiscount;
+    }
+
+    private static boolean isWeekDay(Integer date) {
+        boolean isWeekDay = false;
+        LocalDate visitDate = LocalDate.of(2023 , 12 , date);
+        DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
+        if(dayOfWeek == DayOfWeek.SUNDAY || dayOfWeek == DayOfWeek.MONDAY || dayOfWeek == DayOfWeek.TUESDAY || dayOfWeek == DayOfWeek.WEDNESDAY || dayOfWeek == DayOfWeek.THURSDAY){
+            isWeekDay = true;
+        }
+        return isWeekDay;
+    }
 }

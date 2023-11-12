@@ -12,6 +12,7 @@ public class Application {
         Integer lumpSumBeforeDiscount = Controller.makeLumpSumBeforeDiscount();
         Integer giftMenuCount = Controller.makeGiftMenu(lumpSumBeforeDiscount);
         Integer christmasDiscount = Controller.makeChristmasDiscount(date);
+        Integer weekDayDiscount = Controller.makeWeekDayDiscount(date);
 
     }
 }
