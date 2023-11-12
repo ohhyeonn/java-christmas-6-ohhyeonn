@@ -27,4 +27,9 @@ public class Controller {
         Counter.countMenu(menus);
         OutputView.printMenu();
     }
+
+    public static void makeLumpSumBeforeDiscount() {
+        Integer LumpSumBeforeDiscount = Counter.countLumpSumBeforeDiscount();
+
+    }
 }

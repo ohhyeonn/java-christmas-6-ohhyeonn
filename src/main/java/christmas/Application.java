@@ -9,7 +9,7 @@ public class Application {
         Integer date = Controller.makeVisitDate();
         String[] menus = Controller.makeMenu();
         Controller.makeOrder(date , menus);
-
+        Controller.makeLumpSumBeforeDiscount();
 
     }
 }

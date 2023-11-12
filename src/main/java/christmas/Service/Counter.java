@@ -15,4 +15,15 @@ public class Counter {
 
 
     }
+
+    public static Integer countLumpSumBeforeDiscount() {
+        Integer lumpSumBeforeDiscount = 0;
+        for(Menu menu : Menu.values()){
+            int count = menu.getCount();
+            if(count != 0){
+                lumpSumBeforeDiscount = lumpSumBeforeDiscount + menu.getPrice() * menu.getCount();
+            }
+        }
+        return lumpSumBeforeDiscount;
+    }
 }
