@@ -1,5 +1,6 @@
 package christmas.Service;
 
+import christmas.Model.Badge;
 import christmas.Model.Menu;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -108,5 +109,19 @@ public class Counter {
         return lumpSumBeforeDiscount + christmasDiscount + weekDayDiscount + weekendDiscount + specialDiscount;
 
 
+    }
+
+    public static Badge countBadge(Integer benefitsDiscount) {
+        if(benefitsDiscount <= Badge.SANTA.getUnder()){
+            return Badge.SANTA;
+        }
+        if(benefitsDiscount <= Badge.TREE.getUnder()){
+            return Badge.TREE;
+        }
+        if(benefitsDiscount <= Badge.STAR.getUnder()){
+            return Badge.TREE;
+        }
+
+        return Badge.NONE;
     }
 }

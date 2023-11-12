@@ -1,5 +1,6 @@
 package christmas.Controller;
 
+import christmas.Model.Badge;
 import christmas.Service.Counter;
 import christmas.View.InputView;
 import christmas.View.OutputView;
@@ -76,4 +77,8 @@ public class Controller {
         OutputView.printEstimatedPaymentAmountAfterDiscount(estimatedPaymentAmountAfterDiscount);
     }
 
+    public static void makeEventBadge(Integer benefitsDiscount) {
+        Badge badge = Counter.countBadge(benefitsDiscount);
+
+    }
 }
