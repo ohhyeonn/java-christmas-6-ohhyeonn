@@ -76,4 +76,19 @@ public class Counter {
         }
         return isWeekDay;
     }
+
+    public static Integer countWeekendDiscount(Integer date) {
+        boolean isWeekDay = isWeekDay(date);
+        if(isWeekDay){
+            return 0;
+        }
+
+        Integer weekendDiscount = 0;
+        for(Menu menu : Menu.values()){
+            if(menu == Menu.T_BONE_STEAK || menu == Menu.BBQ_RIBS || menu == Menu.SEAFOOD_PASTA || menu == Menu.CHRISTMAS_PASTA){
+                weekendDiscount = weekendDiscount - (2023 * menu.getCount());
+            }
+        }
+        return weekendDiscount;
+    }
 }
