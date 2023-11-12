@@ -36,5 +36,6 @@ public class Controller {
 
     public static void makeGiftMenu(Integer lumpSumBeforeDiscount) {
         Integer giftMenuCount = Counter.countGiftMenu(lumpSumBeforeDiscount);
+        OutputView.printGiftMenu(giftMenuCount);
     }
 }

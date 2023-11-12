@@ -11,6 +11,9 @@ public class OutputView {
     private static final String COUNT = "개";
     private static final String LUMP_SUM_BEFORE_DISCOUNT = "<할인 전 총주문 금액>";
     private static final String LUMP_SUM_FORMAT = "%,d원\n";
+    private static final String GIFT_MENU = "<증정 메뉴>";
+    private static final String CHAMPAGNE = "샴페인 ";
+    private static final String NOTHING = "없음";
     public static void printIntro() {
         System.out.println(INTRO);
     }
@@ -38,5 +41,15 @@ public class OutputView {
         System.out.println();
         System.out.println(LUMP_SUM_BEFORE_DISCOUNT);
         System.out.printf(LUMP_SUM_FORMAT,lumpSumBeforeDiscount);
+    }
+
+    public static void printGiftMenu(Integer giftMenuCount) {
+        System.out.println();
+        System.out.println(GIFT_MENU);
+        if(giftMenuCount > 0){
+            System.out.println(CHAMPAGNE+giftMenuCount+COUNT);
+            return ;
+        }
+        System.out.println(NOTHING);
     }
 }
