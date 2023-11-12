@@ -96,4 +96,10 @@ public class Counter {
         if(date == 3 || date == 10 || date == 17 || date == 24 || date == 25 || date == 31) return -1000;
         return 0;
     }
+
+    public static Integer countBenefitsDiscount(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
+        Integer benefitsDiscount = (giftMenuCount * -25000) + christmasDiscount + weekDayDiscount + weekendDiscount + specialDiscount;
+
+        return benefitsDiscount;
+    }
 }
