@@ -11,10 +11,10 @@ public class Application {
         Controller.makeOrder(date , menus);
         Integer lumpSumBeforeDiscount = Controller.makeLumpSumBeforeDiscount();
         Integer giftMenuCount = Controller.makeGiftMenu(lumpSumBeforeDiscount);
-        Integer christmasDiscount = Controller.makeChristmasDiscount(date);
-        Integer weekDayDiscount = Controller.makeWeekDayDiscount(date);
-        Integer weekendDiscount = Controller.makeWeekendDiscount(date);
-        Integer specialDiscount = Controller.makeSpecialDiscount(date);
+        Integer christmasDiscount = Controller.makeChristmasDiscount(date,lumpSumBeforeDiscount);
+        Integer weekDayDiscount = Controller.makeWeekDayDiscount(date,lumpSumBeforeDiscount);
+        Integer weekendDiscount = Controller.makeWeekendDiscount(date,lumpSumBeforeDiscount);
+        Integer specialDiscount = Controller.makeSpecialDiscount(date,lumpSumBeforeDiscount);
         Controller.makeBenefitsDetails(giftMenuCount ,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);
         Integer benefitsDiscount = Controller.makeBenefitsDiscount(giftMenuCount ,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);
         Controller.makeEstimatedPaymentAmountAfterDiscount(lumpSumBeforeDiscount,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);

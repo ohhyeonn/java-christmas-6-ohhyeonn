@@ -37,11 +37,19 @@ public class Counter {
         return 0;
     }
 
-    public static Integer countChristmasDiscount(Integer date) {
+    public static Integer countChristmasDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        if(isUnderTenThousands(lumpSumBeforeDiscount)){
+            return 0;
+        }
         LocalDate christmasDate = LocalDate.of(2023,12,25);
         LocalDate visitDate = LocalDate.of(2023,12,date);
         Period diff = Period.between(visitDate , christmasDate);
         return calculateChristmasDiscount(diff.getDays());
+    }
+
+    private static boolean isUnderTenThousands(Integer lumpSumBeforeDiscount) {
+        boolean isOverTenThousands = lumpSumBeforeDiscount < 10000;
+        return isOverTenThousands;
     }
 
     private static Integer calculateChristmasDiscount(int days) {
@@ -53,12 +61,14 @@ public class Counter {
     }
 
 
-    public static Integer countWeekDayDiscount(Integer date) {
+    public static Integer countWeekDayDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        if(isUnderTenThousands(lumpSumBeforeDiscount)){
+            return 0;
+        }
         boolean isWeekDay = isWeekDay(date);
         if(!isWeekDay){
             return 0;
         }
-
         Integer weekDayDiscount = 0;
         for(Menu menu : Menu.values()){
             if(menu == Menu.CHOCOLATE_CAKE || menu == Menu.ICE_CREAM){
@@ -78,12 +88,14 @@ public class Counter {
         return isWeekDay;
     }
 
-    public static Integer countWeekendDiscount(Integer date) {
+    public static Integer countWeekendDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        if(isUnderTenThousands(lumpSumBeforeDiscount)){
+            return 0;
+        }
         boolean isWeekDay = isWeekDay(date);
         if(isWeekDay){
             return 0;
         }
-
         Integer weekendDiscount = 0;
         for(Menu menu : Menu.values()){
             if(menu == Menu.T_BONE_STEAK || menu == Menu.BBQ_RIBS || menu == Menu.SEAFOOD_PASTA || menu == Menu.CHRISTMAS_PASTA){
@@ -93,7 +105,10 @@ public class Counter {
         return weekendDiscount;
     }
 
-    public static Integer countSpecialDiscount(Integer date) {
+    public static Integer countSpecialDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        if(isUnderTenThousands(lumpSumBeforeDiscount)){
+            return 0;
+        }
         if(date == 3 || date == 10 || date == 17 || date == 24 || date == 25 || date == 31) return -1000;
         return 0;
     }

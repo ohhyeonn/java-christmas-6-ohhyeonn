@@ -41,23 +41,23 @@ public class Controller {
         return giftMenuCount;
     }
 
-    public static Integer makeChristmasDiscount(Integer date) {
-        Integer christmasDiscount = Counter.countChristmasDiscount(date);
+    public static Integer makeChristmasDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        Integer christmasDiscount = Counter.countChristmasDiscount(date,lumpSumBeforeDiscount);
         return christmasDiscount;
     }
 
-    public static Integer makeWeekDayDiscount(Integer date) {
-        Integer weekDayDiscount = Counter.countWeekDayDiscount(date);
+    public static Integer makeWeekDayDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        Integer weekDayDiscount = Counter.countWeekDayDiscount(date,lumpSumBeforeDiscount);
         return weekDayDiscount;
     }
 
-    public static Integer makeWeekendDiscount(Integer date) {
-        Integer weekendDiscount = Counter.countWeekendDiscount(date);
+    public static Integer makeWeekendDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        Integer weekendDiscount = Counter.countWeekendDiscount(date,lumpSumBeforeDiscount);
         return weekendDiscount;
     }
 
-    public static Integer makeSpecialDiscount(Integer date) {
-        Integer specialDiscount = Counter.countSpecialDiscount(date);
+    public static Integer makeSpecialDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        Integer specialDiscount = Counter.countSpecialDiscount(date,lumpSumBeforeDiscount);
         return specialDiscount;
     }
 
