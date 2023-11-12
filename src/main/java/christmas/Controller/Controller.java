@@ -68,4 +68,9 @@ public class Controller {
         Integer benefitsDiscount = Counter.countBenefitsDiscount(giftMenuCount, christmasDiscount, weekDayDiscount, weekendDiscount, specialDiscount);
         OutputView.printBenefitsDiscount(benefitsDiscount);
     }
+
+    public static void makeEstimatedPaymentAmountAfterDiscount(Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount,
+            Integer specialDiscount, Integer lumpSumBeforeDiscount) {
+        Integer estimatedPaymentAmountAfterDiscount = Counter.countEstimatedPaymentAmountAfterDiscount(christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount,lumpSumBeforeDiscount);
+    }
 }

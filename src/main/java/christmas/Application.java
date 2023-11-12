@@ -17,5 +17,6 @@ public class Application {
         Integer specialDiscount = Controller.makeSpecialDiscount(date);
         Controller.makeBenefitsDetails(giftMenuCount ,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);
         Controller.makeBenefitsDiscount(giftMenuCount ,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);
+        Controller.makeEstimatedPaymentAmountAfterDiscount(lumpSumBeforeDiscount,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);
     }
 }

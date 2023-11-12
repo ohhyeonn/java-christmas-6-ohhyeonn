@@ -102,4 +102,11 @@ public class Counter {
 
         return benefitsDiscount;
     }
+
+    public static Integer countEstimatedPaymentAmountAfterDiscount(Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount,
+            Integer specialDiscount , Integer lumpSumBeforeDiscount) {
+        return lumpSumBeforeDiscount + christmasDiscount + weekDayDiscount + weekendDiscount + specialDiscount;
+
+
+    }
 }
