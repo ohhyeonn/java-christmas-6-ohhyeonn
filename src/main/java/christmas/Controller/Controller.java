@@ -66,5 +66,6 @@ public class Controller {
 
     public static void makeBenefitsDiscount(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
         Integer benefitsDiscount = Counter.countBenefitsDiscount(giftMenuCount, christmasDiscount, weekDayDiscount, weekendDiscount, specialDiscount);
+        OutputView.printBenefitsDiscount(benefitsDiscount);
     }
 }

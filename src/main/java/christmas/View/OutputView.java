@@ -10,7 +10,7 @@ public class OutputView {
     private static final String BLANC = " ";
     private static final String COUNT = "개";
     private static final String LUMP_SUM_BEFORE_DISCOUNT = "<할인 전 총주문 금액>";
-    private static final String LUMP_SUM_FORMAT = "%,d원\n";
+    private static final String SUM_FORMAT = "%,d원\n";
     private static final String GIFT_MENU = "<증정 메뉴>";
     private static final String CHAMPAGNE = "샴페인 ";
     private static final String NOTHING = "없음";
@@ -20,6 +20,7 @@ public class OutputView {
     private static final String WEEKEND_DISCOUNT_FORMAT = "주말 할인: %,d원\n";
     private static final String SPECIAL_DISCOUNT_FORMAT = "특별 할인: %,d원\n";
     private static final String GIFT_EVENT_PRICE = "증정 이벤트: -25,000원";
+    private static final String BENEFITS_SUM_PRICE = "<총혜택 금액>";
     public static void printIntro() {
         System.out.println(INTRO);
     }
@@ -46,7 +47,7 @@ public class OutputView {
     public static void printLumpSumBeforeDiscount(Integer lumpSumBeforeDiscount) {
         System.out.println();
         System.out.println(LUMP_SUM_BEFORE_DISCOUNT);
-        System.out.printf(LUMP_SUM_FORMAT,lumpSumBeforeDiscount);
+        System.out.printf(SUM_FORMAT,lumpSumBeforeDiscount);
     }
 
     public static void printGiftMenu(Integer giftMenuCount) {
@@ -113,5 +114,15 @@ public class OutputView {
         if(christmasDiscount < 0){
             System.out.printf(CHRISTMAS_D_DAY_DISCOUNT_FORMAT, christmasDiscount);
         }
+    }
+
+    public static void printBenefitsDiscount(Integer benefitsDiscount) {
+        System.out.println();
+        System.out.println(BENEFITS_SUM_PRICE);
+        if(benefitsDiscount < 0){
+            System.out.printf(SUM_FORMAT,benefitsDiscount);
+            return;
+        }
+        System.out.println(NOTHING);
     }
 }
