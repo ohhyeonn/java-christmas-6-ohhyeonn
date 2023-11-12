@@ -79,6 +79,6 @@ public class Controller {
 
     public static void makeEventBadge(Integer benefitsDiscount) {
         Badge badge = Counter.countBadge(benefitsDiscount);
-
+        OutputView.printBadge(badge);
     }
 }

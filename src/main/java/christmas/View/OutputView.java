@@ -1,5 +1,6 @@
 package christmas.View;
 
+import christmas.Model.Badge;
 import christmas.Model.Menu;
 
 public class OutputView {
@@ -22,6 +23,7 @@ public class OutputView {
     private static final String GIFT_EVENT_PRICE = "증정 이벤트: -25,000원";
     private static final String BENEFITS_SUM_PRICE = "<총혜택 금액>";
     private static final String ESTIMATED_PAYMENT_AMOUNT_AFTER_DISCOUNT = "<할인 후 예상 결제 금액>";
+    private static final String EVENT_BADGE = "<12월 이벤트 배지>";
     public static void printIntro() {
         System.out.println(INTRO);
     }
@@ -131,5 +133,11 @@ public class OutputView {
         System.out.println();
         System.out.println(ESTIMATED_PAYMENT_AMOUNT_AFTER_DISCOUNT);
         System.out.printf(SUM_FORMAT, estimatedPaymentAmountAfterDiscount);
+    }
+
+    public static void printBadge(Badge badge) {
+        System.out.println();
+        System.out.println(EVENT_BADGE);
+        System.out.println(badge.getName());
     }
 }
