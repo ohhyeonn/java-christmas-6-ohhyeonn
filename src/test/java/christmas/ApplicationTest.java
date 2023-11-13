@@ -27,6 +27,15 @@ class ApplicationTest extends NsTest {
         Menu.RED_WINE.setCount(0);
         Menu.CHAMPAGNE.setCount(0);
     }
+
+
+    @Test
+    void 메뉴_입력_음료만_입력_하였는지_검증() {
+        assertSimpleTest(() -> {
+            runException("3" , "제로콜라-2,레드와인-1");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
     @Test
     void 메뉴_입력_중복_메뉴_입력_검증() {
         assertSimpleTest(() -> {
