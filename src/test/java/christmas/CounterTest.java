@@ -85,4 +85,23 @@ public class CounterTest {
         // 크리스마스 디데이 할인 -1,200원
         assertThat(discounts.get(Discount.CHRISTMAS_DISCOUNT)).isEqualTo(-1200);
     }
+
+    @Test
+    void countEstimatedPaymentAmountAfterDiscountTest(){
+        //티본스테이크 2개 = 110,000 , 비비큐립 1개 = 54,000 , 아이스크림 2개 = 10,000
+        // 총 = 174,000
+        Menu.BBQ_RIBS.setCount(1);
+        Menu.ICE_CREAM.setCount(2);
+        Menu.T_BONE_STEAK.setCount(2);
+        int date = 3;
+        int lumpSumBeforeDiscount = 174000;
+        //크리스마스 디데이 할인: -1,200원 , 평일 할인: -4,046원 , 특별 할인: -1,000원 , 증정 이벤트: -25,000원
+        // 총 -31,246원
+        HashMap<Discount, Integer> discounts = Counter.countDiscount(date , lumpSumBeforeDiscount);
+
+        Integer estimatedPayment = Counter.countEstimatedPaymentAmountAfterDiscount(discounts,lumpSumBeforeDiscount);
+
+        // 예상 결제 금액 174,000 - 6,246 = 167,754
+        assertThat(estimatedPayment).isEqualTo(167754);
+    }
 }
