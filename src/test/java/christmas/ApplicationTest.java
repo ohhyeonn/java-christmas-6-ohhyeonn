@@ -28,6 +28,16 @@ class ApplicationTest extends NsTest {
         Menu.CHAMPAGNE.setCount(0);
     }
 
+
+    @Test
+    void 방문날짜_입력_1에서_31인지_검증() {
+        assertSimpleTest(() -> {
+            runException("32");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+        });
+    }
+
+
     @Test
     void 모든_타이틀_출력() {
         assertSimpleTest(() -> {
