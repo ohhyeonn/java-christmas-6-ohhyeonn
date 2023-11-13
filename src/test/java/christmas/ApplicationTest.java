@@ -28,6 +28,27 @@ class ApplicationTest extends NsTest {
         Menu.CHAMPAGNE.setCount(0);
     }
 
+    @Test
+    void 할인전_총_주문금액_출력() {
+        assertSimpleTest(() -> {
+            run("3", "해산물파스타-2");
+            assertThat(output()).contains(
+                    "<할인 전 총주문 금액>" + LINE_SEPARATOR+ "70,000원"
+            );
+        });
+    }
+    @Test
+    void 주문메뉴_출력() {
+        assertSimpleTest(() -> {
+            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "티본스테이크 1개",
+                    "바비큐립 1개",
+                    "초코케이크 2개",
+                    "제로콜라 1개"
+            );
+        });
+    }
 
     @Test
     void 개수_입력_총_메뉴의_주문이_20개를_넘는지_검증() {
