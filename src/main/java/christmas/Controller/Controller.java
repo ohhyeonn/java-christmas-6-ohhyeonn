@@ -58,12 +58,7 @@ public class Controller {
     }
 
     public static HashMap<Discount, Integer> makeDiscount(Integer date, Integer lumpSumBeforeDiscount) {
-        HashMap<Discount , Integer> discounts = new HashMap<>();
-        discounts.put(Discount.GIFT_MENU_COUNT, Counter.countGiftMenu(lumpSumBeforeDiscount));
-        discounts.put(Discount.CHRISTMAS_DISCOUNT , Counter.countChristmasDiscount(date,lumpSumBeforeDiscount));
-        discounts.put(Discount.WEEK_DAY_DISCOUNT , Counter.countWeekDayDiscount(date,lumpSumBeforeDiscount));
-        discounts.put(Discount.WEEKEND_DISCOUNT , Counter.countWeekendDiscount(date,lumpSumBeforeDiscount));
-        discounts.put(Discount.SPECIAL_DISCOUNT , Counter.countSpecialDiscount(date,lumpSumBeforeDiscount));
+        HashMap<Discount , Integer> discounts = Counter.countDiscount(date , lumpSumBeforeDiscount);
         return discounts;
     }
 

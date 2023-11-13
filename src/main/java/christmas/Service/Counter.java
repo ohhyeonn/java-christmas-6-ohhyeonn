@@ -81,14 +81,14 @@ public class Counter {
         return Badge.NONE;
     }
 
-    public static Integer countGiftMenu(Integer lumpSumBeforeDiscount) {
+    private static Integer countGiftMenu(Integer lumpSumBeforeDiscount) {
         if(lumpSumBeforeDiscount >= 120000){
             return 1;
         }
         return 0;
     }
 
-    public static Integer countChristmasDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+    private static Integer countChristmasDiscount(Integer date, Integer lumpSumBeforeDiscount) {
         if(isUnderTenThousands(lumpSumBeforeDiscount)){
             return 0;
         }
@@ -98,7 +98,7 @@ public class Counter {
         return calculateChristmasDiscount(diff.getDays());
     }
 
-    public static Integer countWeekDayDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+    private static Integer countWeekDayDiscount(Integer date, Integer lumpSumBeforeDiscount) {
         if(isUnderTenThousands(lumpSumBeforeDiscount)){
             return 0;
         }
@@ -115,7 +115,7 @@ public class Counter {
         return weekDayDiscount;
     }
 
-    public static Integer countWeekendDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+    private static Integer countWeekendDiscount(Integer date, Integer lumpSumBeforeDiscount) {
         if(isUnderTenThousands(lumpSumBeforeDiscount)){
             return 0;
         }
@@ -132,11 +132,21 @@ public class Counter {
         return weekendDiscount;
     }
 
-    public static Integer countSpecialDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+    private static Integer countSpecialDiscount(Integer date, Integer lumpSumBeforeDiscount) {
         if(isUnderTenThousands(lumpSumBeforeDiscount)){
             return 0;
         }
         if(date == 3 || date == 10 || date == 17 || date == 24 || date == 25 || date == 31) return -1000;
         return 0;
+    }
+
+    public static HashMap<Discount, Integer> countDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        HashMap<Discount , Integer> discounts = new HashMap<>();
+        discounts.put(Discount.GIFT_MENU_COUNT, countGiftMenu(lumpSumBeforeDiscount));
+        discounts.put(Discount.CHRISTMAS_DISCOUNT , countChristmasDiscount(date,lumpSumBeforeDiscount));
+        discounts.put(Discount.WEEK_DAY_DISCOUNT , countWeekDayDiscount(date,lumpSumBeforeDiscount));
+        discounts.put(Discount.WEEKEND_DISCOUNT , countWeekendDiscount(date,lumpSumBeforeDiscount));
+        discounts.put(Discount.SPECIAL_DISCOUNT , countSpecialDiscount(date,lumpSumBeforeDiscount));
+        return discounts;
     }
 }
