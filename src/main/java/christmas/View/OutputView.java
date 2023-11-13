@@ -1,7 +1,9 @@
 package christmas.View;
 
 import christmas.Model.Badge;
+import christmas.Model.Discount;
 import christmas.Model.Menu;
+import java.util.HashMap;
 
 public class OutputView {
     private static final String INTRO = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -63,15 +65,15 @@ public class OutputView {
         System.out.println(NOTHING);
     }
 
-    public static void printBenefitsDetails(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
+    public static void printBenefitsDetails(HashMap<Discount , Integer> discounts) {
         printBenefitsList();
-        printChristmasDiscount(christmasDiscount);
-        printWeekDayDiscount(weekDayDiscount);
-        printWeekendDiscount(weekendDiscount);
-        printSpecialDiscount(specialDiscount);
-        printGiftEvent(giftMenuCount);
-        printBenefitsNothing(giftMenuCount, christmasDiscount, weekDayDiscount, weekendDiscount,
-                specialDiscount);
+
+        printChristmasDiscount(discounts.get(Discount.CHRISTMAS_DISCOUNT));
+        printWeekDayDiscount(discounts.get(Discount.WEEK_DAY_DISCOUNT));
+        printWeekendDiscount(discounts.get(Discount.WEEKEND_DISCOUNT));
+        printSpecialDiscount(discounts.get(Discount.SPECIAL_DISCOUNT));
+        printGiftEvent(discounts.get(Discount.GIFT_MENU_COUNT));
+        printBenefitsNothing(discounts);
 
 
     }
@@ -81,10 +83,9 @@ public class OutputView {
         System.out.println(BENEFITS_LIST);
     }
 
-    private static void printBenefitsNothing(Integer giftMenuCount, Integer christmasDiscount,
-            Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
-        if(christmasDiscount == 0 && weekDayDiscount == 0 && weekendDiscount == 0 && specialDiscount
-                == 0 && giftMenuCount == 0){
+    private static void printBenefitsNothing(HashMap<Discount , Integer> discounts) {
+        if(discounts.get(Discount.CHRISTMAS_DISCOUNT) == 0 && discounts.get(Discount.WEEK_DAY_DISCOUNT) == 0 && discounts.get(Discount.WEEKEND_DISCOUNT) == 0 && discounts.get(Discount.SPECIAL_DISCOUNT)
+                == 0 && discounts.get(Discount.GIFT_MENU_COUNT) == 0){
             System.out.println(NOTHING);
         }
     }

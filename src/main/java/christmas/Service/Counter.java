@@ -1,10 +1,12 @@
 package christmas.Service;
 
 import christmas.Model.Badge;
+import christmas.Model.Discount;
 import christmas.Model.Menu;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashMap;
 
 public class Counter {
     public static void countMenu(String[] menus) {
@@ -30,6 +32,55 @@ public class Counter {
         return lumpSumBeforeDiscount;
     }
 
+    private static boolean isUnderTenThousands(Integer lumpSumBeforeDiscount) {
+        boolean isOverTenThousands = lumpSumBeforeDiscount < 10000;
+        return isOverTenThousands;
+    }
+
+    private static Integer calculateChristmasDiscount(int days) {
+        if(days >= 0){
+            int totalDiscount = -3400;
+            return totalDiscount + 100 * days;
+        }
+        return 0;
+    }
+
+    private static boolean isWeekDay(Integer date) {
+        boolean isWeekDay = false;
+        LocalDate visitDate = LocalDate.of(2023 , 12 , date);
+        DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
+        if(dayOfWeek == DayOfWeek.SUNDAY || dayOfWeek == DayOfWeek.MONDAY || dayOfWeek == DayOfWeek.TUESDAY || dayOfWeek == DayOfWeek.WEDNESDAY || dayOfWeek == DayOfWeek.THURSDAY){
+            isWeekDay = true;
+        }
+        return isWeekDay;
+    }
+
+    public static Integer countBenefitsDiscount(HashMap<Discount , Integer> discounts) {
+        Integer benefitsDiscount = (discounts.get(Discount.GIFT_MENU_COUNT) * -25000) + discounts.get(Discount.CHRISTMAS_DISCOUNT) + discounts.get(Discount.WEEK_DAY_DISCOUNT) + discounts.get(Discount.WEEKEND_DISCOUNT) + discounts.get(Discount.SPECIAL_DISCOUNT);
+
+        return benefitsDiscount;
+    }
+
+    public static Integer countEstimatedPaymentAmountAfterDiscount(HashMap<Discount,Integer> discounts , Integer lumpSumBeforeDiscount) {
+        return lumpSumBeforeDiscount + discounts.get(Discount.CHRISTMAS_DISCOUNT) + discounts.get(Discount.WEEK_DAY_DISCOUNT) + discounts.get(Discount.WEEKEND_DISCOUNT) + discounts.get(Discount.SPECIAL_DISCOUNT);
+
+
+    }
+
+    public static Badge countBadge(Integer benefitsDiscount) {
+        if(benefitsDiscount <= Badge.SANTA.getUnder()){
+            return Badge.SANTA;
+        }
+        if(benefitsDiscount <= Badge.TREE.getUnder()){
+            return Badge.TREE;
+        }
+        if(benefitsDiscount <= Badge.STAR.getUnder()){
+            return Badge.TREE;
+        }
+
+        return Badge.NONE;
+    }
+
     public static Integer countGiftMenu(Integer lumpSumBeforeDiscount) {
         if(lumpSumBeforeDiscount >= 120000){
             return 1;
@@ -47,20 +98,6 @@ public class Counter {
         return calculateChristmasDiscount(diff.getDays());
     }
 
-    private static boolean isUnderTenThousands(Integer lumpSumBeforeDiscount) {
-        boolean isOverTenThousands = lumpSumBeforeDiscount < 10000;
-        return isOverTenThousands;
-    }
-
-    private static Integer calculateChristmasDiscount(int days) {
-        if(days >= 0){
-            int totalDiscount = -3400;
-            return totalDiscount + 100 * days;
-        }
-        return 0;
-    }
-
-
     public static Integer countWeekDayDiscount(Integer date, Integer lumpSumBeforeDiscount) {
         if(isUnderTenThousands(lumpSumBeforeDiscount)){
             return 0;
@@ -76,16 +113,6 @@ public class Counter {
             }
         }
         return weekDayDiscount;
-    }
-
-    private static boolean isWeekDay(Integer date) {
-        boolean isWeekDay = false;
-        LocalDate visitDate = LocalDate.of(2023 , 12 , date);
-        DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
-        if(dayOfWeek == DayOfWeek.SUNDAY || dayOfWeek == DayOfWeek.MONDAY || dayOfWeek == DayOfWeek.TUESDAY || dayOfWeek == DayOfWeek.WEDNESDAY || dayOfWeek == DayOfWeek.THURSDAY){
-            isWeekDay = true;
-        }
-        return isWeekDay;
     }
 
     public static Integer countWeekendDiscount(Integer date, Integer lumpSumBeforeDiscount) {
@@ -111,32 +138,5 @@ public class Counter {
         }
         if(date == 3 || date == 10 || date == 17 || date == 24 || date == 25 || date == 31) return -1000;
         return 0;
-    }
-
-    public static Integer countBenefitsDiscount(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
-        Integer benefitsDiscount = (giftMenuCount * -25000) + christmasDiscount + weekDayDiscount + weekendDiscount + specialDiscount;
-
-        return benefitsDiscount;
-    }
-
-    public static Integer countEstimatedPaymentAmountAfterDiscount(Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount,
-            Integer specialDiscount , Integer lumpSumBeforeDiscount) {
-        return lumpSumBeforeDiscount + christmasDiscount + weekDayDiscount + weekendDiscount + specialDiscount;
-
-
-    }
-
-    public static Badge countBadge(Integer benefitsDiscount) {
-        if(benefitsDiscount <= Badge.SANTA.getUnder()){
-            return Badge.SANTA;
-        }
-        if(benefitsDiscount <= Badge.TREE.getUnder()){
-            return Badge.TREE;
-        }
-        if(benefitsDiscount <= Badge.STAR.getUnder()){
-            return Badge.TREE;
-        }
-
-        return Badge.NONE;
     }
 }

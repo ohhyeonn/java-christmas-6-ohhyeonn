@@ -1,9 +1,11 @@
 package christmas.Controller;
 
 import christmas.Model.Badge;
+import christmas.Model.Discount;
 import christmas.Service.Counter;
 import christmas.View.InputView;
 import christmas.View.OutputView;
+import java.util.HashMap;
 
 public class Controller {
 
@@ -35,50 +37,37 @@ public class Controller {
         return LumpSumBeforeDiscount;
     }
 
-    public static Integer makeGiftMenu(Integer lumpSumBeforeDiscount) {
-        Integer giftMenuCount = Counter.countGiftMenu(lumpSumBeforeDiscount);
-        OutputView.printGiftMenu(giftMenuCount);
-        return giftMenuCount;
+    public static void makeBenefitsDetails(HashMap<Discount , Integer> discounts) {
+        OutputView.printBenefitsDetails(discounts);
     }
 
-    public static Integer makeChristmasDiscount(Integer date, Integer lumpSumBeforeDiscount) {
-        Integer christmasDiscount = Counter.countChristmasDiscount(date,lumpSumBeforeDiscount);
-        return christmasDiscount;
-    }
-
-    public static Integer makeWeekDayDiscount(Integer date, Integer lumpSumBeforeDiscount) {
-        Integer weekDayDiscount = Counter.countWeekDayDiscount(date,lumpSumBeforeDiscount);
-        return weekDayDiscount;
-    }
-
-    public static Integer makeWeekendDiscount(Integer date, Integer lumpSumBeforeDiscount) {
-        Integer weekendDiscount = Counter.countWeekendDiscount(date,lumpSumBeforeDiscount);
-        return weekendDiscount;
-    }
-
-    public static Integer makeSpecialDiscount(Integer date, Integer lumpSumBeforeDiscount) {
-        Integer specialDiscount = Counter.countSpecialDiscount(date,lumpSumBeforeDiscount);
-        return specialDiscount;
-    }
-
-    public static void makeBenefitsDetails(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
-        OutputView.printBenefitsDetails(giftMenuCount,christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount);
-    }
-
-    public static Integer makeBenefitsDiscount(Integer giftMenuCount, Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount, Integer specialDiscount) {
-        Integer benefitsDiscount = Counter.countBenefitsDiscount(giftMenuCount, christmasDiscount, weekDayDiscount, weekendDiscount, specialDiscount);
+    public static Integer makeBenefitsDiscount(HashMap<Discount , Integer> discounts) {
+        Integer benefitsDiscount = Counter.countBenefitsDiscount(discounts);
         OutputView.printBenefitsDiscount(benefitsDiscount);
         return benefitsDiscount;
     }
 
-    public static void makeEstimatedPaymentAmountAfterDiscount(Integer christmasDiscount, Integer weekDayDiscount, Integer weekendDiscount,
-            Integer specialDiscount, Integer lumpSumBeforeDiscount) {
-        Integer estimatedPaymentAmountAfterDiscount = Counter.countEstimatedPaymentAmountAfterDiscount(christmasDiscount,weekDayDiscount,weekendDiscount,specialDiscount,lumpSumBeforeDiscount);
+    public static void makeEstimatedPaymentAmountAfterDiscount(HashMap<Discount,Integer> discounts, Integer lumpSumBeforeDiscount) {
+        Integer estimatedPaymentAmountAfterDiscount = Counter.countEstimatedPaymentAmountAfterDiscount(discounts,lumpSumBeforeDiscount);
         OutputView.printEstimatedPaymentAmountAfterDiscount(estimatedPaymentAmountAfterDiscount);
     }
 
     public static void makeEventBadge(Integer benefitsDiscount) {
         Badge badge = Counter.countBadge(benefitsDiscount);
         OutputView.printBadge(badge);
+    }
+
+    public static HashMap<Discount, Integer> makeDiscount(Integer date, Integer lumpSumBeforeDiscount) {
+        HashMap<Discount , Integer> discounts = new HashMap<>();
+        discounts.put(Discount.GIFT_MENU_COUNT, Counter.countGiftMenu(lumpSumBeforeDiscount));
+        discounts.put(Discount.CHRISTMAS_DISCOUNT , Counter.countChristmasDiscount(date,lumpSumBeforeDiscount));
+        discounts.put(Discount.WEEK_DAY_DISCOUNT , Counter.countWeekDayDiscount(date,lumpSumBeforeDiscount));
+        discounts.put(Discount.WEEKEND_DISCOUNT , Counter.countWeekendDiscount(date,lumpSumBeforeDiscount));
+        discounts.put(Discount.SPECIAL_DISCOUNT , Counter.countSpecialDiscount(date,lumpSumBeforeDiscount));
+        return discounts;
+    }
+
+    public static void makeGiftMenu(HashMap<Discount, Integer> discounts) {
+        OutputView.printGiftMenu(discounts.get(Discount.GIFT_MENU_COUNT));
     }
 }
