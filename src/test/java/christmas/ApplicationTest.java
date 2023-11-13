@@ -30,6 +30,13 @@ class ApplicationTest extends NsTest {
 
 
     @Test
+    void 개수_입력_총_메뉴의_주문이_20개를_넘는지_검증() {
+        assertSimpleTest(() -> {
+            runException("3" , "해산물파스타-21");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+    @Test
     void 개수_입력_1이상의_숫자인지_검증() {
         assertSimpleTest(() -> {
             runException("3" , "제로콜라-2,레드와인-0");
