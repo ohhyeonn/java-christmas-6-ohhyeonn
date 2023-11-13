@@ -36,5 +36,15 @@ public class CounterTest {
         assertThat(Menu.ICE_CREAM.getCount()).isEqualTo(2);
     }
 
+    @Test
+    void countLumpSumBeforeDiscountTest(){
+        Menu.BBQ_RIBS.setCount(1);
+        Menu.ICE_CREAM.setCount(2);
+
+        int lumpSum = Counter.countLumpSumBeforeDiscount();
+
+        assertThat(lumpSum).isEqualTo(64000);
+    }
+
 
 }
