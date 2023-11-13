@@ -1,9 +1,9 @@
 package christmas;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-
 import christmas.Model.Menu;
+import christmas.Service.Counter;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,5 +24,17 @@ public class CounterTest {
         Menu.RED_WINE.setCount(0);
         Menu.CHAMPAGNE.setCount(0);
     }
+
+
+    @Test
+    void countMenuTest() {
+        String line = "양송이수프-1,아이스크림-2";
+        String[] sets = line.split(",");
+
+        Counter.countMenu(sets);
+
+        assertThat(Menu.ICE_CREAM.getCount()).isEqualTo(2);
+    }
+
 
 }
