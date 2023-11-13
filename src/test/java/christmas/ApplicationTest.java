@@ -12,6 +12,9 @@ class ApplicationTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
 
+
+
+
     @BeforeEach
     void 각각의_테스트_하기전() {
         Menu.MUSHROOM_SOUP.setCount(0);
@@ -28,6 +31,15 @@ class ApplicationTest extends NsTest {
         Menu.CHAMPAGNE.setCount(0);
     }
 
+    @Test
+    void 할인후_예상_결제금액_출력() {
+        assertSimpleTest(() -> {
+            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "<할인 후 예상 결제 금액>" + LINE_SEPARATOR+ "135,754원"
+            );
+        });
+    }
 
     @Test
     void 총혜택_금액_출력() {
