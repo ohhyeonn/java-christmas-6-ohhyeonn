@@ -75,7 +75,7 @@ public class Counter {
             return Badge.TREE;
         }
         if(benefitsDiscount <= Badge.STAR.getUnder()){
-            return Badge.TREE;
+            return Badge.STAR;
         }
 
         return Badge.NONE;
