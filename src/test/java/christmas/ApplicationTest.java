@@ -29,6 +29,14 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 메뉴_입력_메뉴에_있는지_검증() {
+        assertSimpleTest(() -> {
+            runException("31" , "알리오올리오-2");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
+
+    @Test
     void 메뉴와_개수_입력_형식_검증() {
         assertSimpleTest(() -> {
             runException("31" , "해산물파스타_2");
