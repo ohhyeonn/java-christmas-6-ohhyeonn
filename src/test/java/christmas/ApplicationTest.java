@@ -27,6 +27,14 @@ class ApplicationTest extends NsTest {
         Menu.RED_WINE.setCount(0);
         Menu.CHAMPAGNE.setCount(0);
     }
+
+    @Test
+    void 메뉴와_개수_입력_형식_검증() {
+        assertSimpleTest(() -> {
+            runException("31" , "해산물파스타_2");
+            assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        });
+    }
     @Test
     void 메뉴와_개수_입력_공백_검증() {
         assertSimpleTest(() -> {
