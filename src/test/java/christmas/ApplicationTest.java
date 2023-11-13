@@ -27,6 +27,18 @@ class ApplicationTest extends NsTest {
         Menu.RED_WINE.setCount(0);
         Menu.CHAMPAGNE.setCount(0);
     }
+
+
+    @Test
+    void 총혜택_금액_출력() {
+        assertSimpleTest(() -> {
+            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "<총혜택 금액>" + LINE_SEPARATOR+ "-31,246원"
+            );
+        });
+    }
+
     @Test
     void 혜택내역_출력() {
         assertSimpleTest(() -> {
