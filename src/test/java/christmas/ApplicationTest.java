@@ -32,6 +32,18 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 산타뱃지_출력() {
+        assertSimpleTest(() -> {
+            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "<12월 이벤트 배지>" + LINE_SEPARATOR+ "산타"
+            );
+        });
+    }
+
+
+
+    @Test
     void 할인후_예상_결제금액_출력() {
         assertSimpleTest(() -> {
             run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
