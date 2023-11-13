@@ -29,6 +29,15 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 증정메뉴_출력() {
+        assertSimpleTest(() -> {
+            run("3", "해산물파스타-5");
+            assertThat(output()).contains(
+                    "<증정 메뉴>" + LINE_SEPARATOR+ "샴페인 1개"
+            );
+        });
+    }
+    @Test
     void 할인전_총_주문금액_출력() {
         assertSimpleTest(() -> {
             run("3", "해산물파스타-2");
