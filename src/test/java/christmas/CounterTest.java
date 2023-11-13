@@ -2,6 +2,7 @@ package christmas;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.Model.Badge;
 import christmas.Model.Discount;
 import christmas.Model.Menu;
 import christmas.Service.Counter;
@@ -103,5 +104,15 @@ public class CounterTest {
 
         // 예상 결제 금액 174,000 - 6,246 = 167,754
         assertThat(estimatedPayment).isEqualTo(167754);
+    }
+
+    @Test
+    void countBadgeTest(){
+        Integer benefitsDiscount = -6000;
+
+        Badge badge = Counter.countBadge(benefitsDiscount);
+
+        // 6,000원 할인은 별
+        assertThat(badge).isEqualTo(Badge.STAR);
     }
 }
