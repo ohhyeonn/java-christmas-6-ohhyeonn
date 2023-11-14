@@ -137,7 +137,7 @@ public class InputView {
         if(BLANC_STRING.equals(line)) throw new IllegalArgumentException();
     }
 
-    public static Receipt makeOrder() {
+    public static Receipt makeReceipt() {
         return new Receipt(readDate() , readMenu());
     }
 }

@@ -12,7 +12,7 @@ public class Controller {
     }
 
     public static Receipt makeVisitDateMenus() {
-        return InputView.makeOrder();
+        return InputView.makeReceipt();
 
     }
 
