@@ -46,5 +46,15 @@ public class ReceiptTest {
         assertThat(lumpSumBeforeDiscount).isEqualTo(86000);
     }
 
+    @Test
+    void giftMenuCountTest() {
+        Receipt receipt = new Receipt(3 , "티본스테이크-2,아이스크림-2,제로콜라-2".split(","));
+
+        // 아이스크림2개 10000 , 티본스테이크2개 110000 , 제로콜라2개 6000
+        // 총 126000 -> 사은품 증정 1개
+        int giftMenuCount = receipt.getGiftMenuCount();
+
+        assertThat(giftMenuCount).isEqualTo(1);
+    }
 
 }
