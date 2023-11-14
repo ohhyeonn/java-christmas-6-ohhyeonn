@@ -5,6 +5,7 @@ import christmas.Model.Menu;
 import christmas.Model.Receipt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReceiptTest {
@@ -28,7 +29,7 @@ public class ReceiptTest {
 
     @Test
     void visitDateTest() {
-        Receipt receipt = new Receipt(12 , "해산물파스타-2,아이스크림-1".split(","));
+        Receipt receipt = new Receipt(12, "해산물파스타-2,아이스크림-1".split(","));
 
         // 방문일 12 일
         int visitDate = receipt.getVisitDate();
@@ -38,7 +39,7 @@ public class ReceiptTest {
 
     @Test
     void lumpSumBeforeDiscountTest() {
-        Receipt receipt = new Receipt(12 , "해산물파스타-2,아이스크림-2,제로콜라-2".split(","));
+        Receipt receipt = new Receipt(12, "해산물파스타-2,아이스크림-2,제로콜라-2".split(","));
 
         // 아이스크림2개 10000 , 해산물파스타2개 70000 , 제로콜라2개 6000
         // 총 86000
@@ -49,7 +50,7 @@ public class ReceiptTest {
 
     @Test
     void giftMenuCountTest() {
-        Receipt receipt = new Receipt(3 , "티본스테이크-2,아이스크림-2,제로콜라-2".split(","));
+        Receipt receipt = new Receipt(3, "티본스테이크-2,아이스크림-2,제로콜라-2".split(","));
 
         // 아이스크림2개 10000 , 티본스테이크2개 110000 , 제로콜라2개 6000
         // 총 126000 -> 사은품 증정 1개
@@ -59,11 +60,9 @@ public class ReceiptTest {
     }
 
 
-
-
     @Test
     void christmasDiscountTest() {
-        Receipt receipt = new Receipt(19 , "크리스마스파스타-3,아이스크림-3".split(","));
+        Receipt receipt = new Receipt(19, "크리스마스파스타-3,아이스크림-3".split(","));
 
         // 12/1 1000원할인 , 12/19 2800원할인
         int christmasDiscount = receipt.countChristmasDiscount();
@@ -74,7 +73,7 @@ public class ReceiptTest {
 
     @Test
     void weekDayDiscountTest() {
-        Receipt receipt = new Receipt(21 , "바비큐립-2,레드와인-2,아이스크림-2".split(","));
+        Receipt receipt = new Receipt(21, "바비큐립-2,레드와인-2,아이스크림-2".split(","));
 
         // 12/21 목요일 (평일)
         // 디저트메뉴 아이스크림 2개 할인 4046원
@@ -85,7 +84,7 @@ public class ReceiptTest {
 
     @Test
     void weekendDiscountTest() {
-        Receipt receipt = new Receipt(22 , "해산물파스타-1,바비큐립-1,레드와인-2,아이스크림-2".split(","));
+        Receipt receipt = new Receipt(22, "해산물파스타-1,바비큐립-1,레드와인-2,아이스크림-2".split(","));
 
         // 12/22 금요일 주말
         // 메인메뉴 해산물파스타 1개 바비큐립 1개 할인
@@ -97,7 +96,7 @@ public class ReceiptTest {
 
     @Test
     void specialDiscountTest() {
-        Receipt receipt = new Receipt(24 , "바비큐립-1,아이스크림-2".split(","));
+        Receipt receipt = new Receipt(24, "바비큐립-1,아이스크림-2".split(","));
 
         // 12/24 별표 표시 있음
         // 1000원 할인
@@ -109,7 +108,7 @@ public class ReceiptTest {
 
     @Test
     void benefitsDiscountTest() {
-        Receipt receipt = new Receipt(18 , "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
+        Receipt receipt = new Receipt(18, "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
 
         // 12/18 월요일
         // 크리스마스 디데이 할인: -2,700원
@@ -123,15 +122,13 @@ public class ReceiptTest {
 
     @Test
     void estimatedPaymentAmountAfterDiscountTest() {
-        Receipt receipt = new Receipt(3 , "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
+        Receipt receipt = new Receipt(3, "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
 
         // 12/3 일요일
         int estimatedPaymentAmountAfterDiscount = receipt.countEstimatedPaymentAmountAfterDiscount();
 
         assertThat(estimatedPaymentAmountAfterDiscount).isEqualTo(135754);
     }
-
-
 
 
     @Test

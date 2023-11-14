@@ -6,6 +6,7 @@ import christmas.Model.Menu;
 import christmas.Model.Receipt;
 
 public class OutputView {
+
     public static void printIntro() {
         System.out.println(Constant.INTRO);
     }
@@ -14,11 +15,11 @@ public class OutputView {
     public static void printMenu() {
         System.out.println();
         System.out.println(Constant.ORDERED_MENU);
-        for(Menu menu : Menu.values()){
+        for (Menu menu : Menu.values()) {
             int count = menu.getCount();
-            if(count != Constant.ZERO){
-                System.out.print(menu.getName()+Constant.BLANC);
-                System.out.println(count+Constant.COUNT);
+            if (count != Constant.ZERO) {
+                System.out.print(menu.getName() + Constant.BLANC);
+                System.out.println(count + Constant.COUNT);
             }
 
         }
@@ -26,7 +27,7 @@ public class OutputView {
     }
 
     public static void printEventIntro(Receipt receipt) {
-        System.out.println(Constant.DECEMBER+ receipt.getVisitDate()+Constant.EVENT_INTRO );
+        System.out.println(Constant.DECEMBER + receipt.getVisitDate() + Constant.EVENT_INTRO);
     }
 
     public static void printLumpSumBeforeDiscount(Receipt receipt) {
@@ -38,9 +39,9 @@ public class OutputView {
     public static void printGiftMenu(Receipt receipt) {
         System.out.println();
         System.out.println(Constant.GIFT_MENU);
-        if(receipt.countGiftMenu() > Constant.ZERO){
-            System.out.println(Constant.CHAMPAGNE+receipt.countGiftMenu()+Constant.COUNT);
-            return ;
+        if (receipt.countGiftMenu() > Constant.ZERO) {
+            System.out.println(Constant.CHAMPAGNE + receipt.countGiftMenu() + Constant.COUNT);
+            return;
         }
         System.out.println(Constant.NOTHING);
     }
@@ -64,38 +65,40 @@ public class OutputView {
     }
 
     private static void printBenefitsNothing(Receipt receipt) {
-        if(receipt.countChristmasDiscount() == Constant.ZERO && receipt.countWeekDayDiscount() == Constant.ZERO && receipt.countWeekendDiscount() == Constant.ZERO && receipt.countSpecialDiscount()
-                == Constant.ZERO && receipt.countGiftMenu() == Constant.ZERO){
+        if (receipt.countChristmasDiscount() == Constant.ZERO
+                && receipt.countWeekDayDiscount() == Constant.ZERO
+                && receipt.countWeekendDiscount() == Constant.ZERO && receipt.countSpecialDiscount()
+                == Constant.ZERO && receipt.countGiftMenu() == Constant.ZERO) {
             System.out.println(Constant.NOTHING);
         }
     }
 
     private static void printGiftEvent(Integer giftMenuCount) {
-        if(giftMenuCount > Constant.ZERO){
+        if (giftMenuCount > Constant.ZERO) {
             System.out.println(Constant.GIFT_EVENT_PRICE);
         }
     }
 
     private static void printSpecialDiscount(Integer specialDiscount) {
-        if(specialDiscount < Constant.ZERO){
+        if (specialDiscount < Constant.ZERO) {
             System.out.printf(Constant.SPECIAL_DISCOUNT_FORMAT, specialDiscount);
         }
     }
 
     private static void printWeekendDiscount(Integer weekendDiscount) {
-        if(weekendDiscount < Constant.ZERO){
+        if (weekendDiscount < Constant.ZERO) {
             System.out.printf(Constant.WEEKEND_DISCOUNT_FORMAT, weekendDiscount);
         }
     }
 
     private static void printWeekDayDiscount(Integer weekDayDiscount) {
-        if(weekDayDiscount < Constant.ZERO){
+        if (weekDayDiscount < Constant.ZERO) {
             System.out.printf(Constant.WEEKDAY_DISCOUNT_FORMAT, weekDayDiscount);
         }
     }
 
     private static void printChristmasDiscount(Integer christmasDiscount) {
-        if(christmasDiscount < Constant.ZERO){
+        if (christmasDiscount < Constant.ZERO) {
             System.out.printf(Constant.CHRISTMAS_D_DAY_DISCOUNT_FORMAT, christmasDiscount);
         }
     }
@@ -103,8 +106,8 @@ public class OutputView {
     public static void printBenefitsDiscount(Receipt receipt) {
         System.out.println();
         System.out.println(Constant.BENEFITS_SUM_PRICE);
-        if(receipt.countBenefitsDiscount() < Constant.ZERO){
-            System.out.printf(Constant.SUM_FORMAT,receipt.countBenefitsDiscount());
+        if (receipt.countBenefitsDiscount() < Constant.ZERO) {
+            System.out.printf(Constant.SUM_FORMAT, receipt.countBenefitsDiscount());
             return;
         }
         System.out.println(Constant.NOTHING);

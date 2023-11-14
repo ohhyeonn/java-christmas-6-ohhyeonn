@@ -9,10 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
+
     private static final String LINE_SEPARATOR = System.lineSeparator();
-
-
-
 
 
     @BeforeEach
@@ -36,11 +34,10 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
             assertThat(output()).contains(
-                    "<12월 이벤트 배지>" + LINE_SEPARATOR+ "산타"
+                    "<12월 이벤트 배지>" + LINE_SEPARATOR + "산타"
             );
         });
     }
-
 
 
     @Test
@@ -48,7 +45,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
             assertThat(output()).contains(
-                    "<할인 후 예상 결제 금액>" + LINE_SEPARATOR+ "135,754원"
+                    "<할인 후 예상 결제 금액>" + LINE_SEPARATOR + "135,754원"
             );
         });
     }
@@ -58,7 +55,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
             assertThat(output()).contains(
-                    "<총혜택 금액>" + LINE_SEPARATOR+ "-31,246원"
+                    "<총혜택 금액>" + LINE_SEPARATOR + "-31,246원"
             );
         });
     }
@@ -68,31 +65,34 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
             assertThat(output()).contains(
-                    "<혜택 내역>" + LINE_SEPARATOR+ "크리스마스 디데이 할인: -1,200원"
-                            + LINE_SEPARATOR+ "평일 할인: -4,046원"
-                            + LINE_SEPARATOR+ "특별 할인: -1,000원"
-                            + LINE_SEPARATOR+ "증정 이벤트: -25,000원"
+                    "<혜택 내역>" + LINE_SEPARATOR + "크리스마스 디데이 할인: -1,200원"
+                            + LINE_SEPARATOR + "평일 할인: -4,046원"
+                            + LINE_SEPARATOR + "특별 할인: -1,000원"
+                            + LINE_SEPARATOR + "증정 이벤트: -25,000원"
             );
         });
     }
+
     @Test
     void 증정메뉴_출력() {
         assertSimpleTest(() -> {
             run("3", "해산물파스타-5");
             assertThat(output()).contains(
-                    "<증정 메뉴>" + LINE_SEPARATOR+ "샴페인 1개"
+                    "<증정 메뉴>" + LINE_SEPARATOR + "샴페인 1개"
             );
         });
     }
+
     @Test
     void 할인전_총_주문금액_출력() {
         assertSimpleTest(() -> {
             run("3", "해산물파스타-2");
             assertThat(output()).contains(
-                    "<할인 전 총주문 금액>" + LINE_SEPARATOR+ "70,000원"
+                    "<할인 전 총주문 금액>" + LINE_SEPARATOR + "70,000원"
             );
         });
     }
+
     @Test
     void 주문메뉴_출력() {
         assertSimpleTest(() -> {
@@ -109,14 +109,15 @@ class ApplicationTest extends NsTest {
     @Test
     void 개수_입력_총_메뉴의_주문이_20개를_넘는지_검증() {
         assertSimpleTest(() -> {
-            runException("3" , "해산물파스타-21");
+            runException("3", "해산물파스타-21");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 개수_입력_1이상의_숫자인지_검증() {
         assertSimpleTest(() -> {
-            runException("3" , "제로콜라-2,레드와인-0");
+            runException("3", "제로콜라-2,레드와인-0");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
@@ -125,21 +126,23 @@ class ApplicationTest extends NsTest {
     @Test
     void 메뉴_입력_음료만_입력_하였는지_검증() {
         assertSimpleTest(() -> {
-            runException("3" , "제로콜라-2,레드와인-1");
+            runException("3", "제로콜라-2,레드와인-1");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 메뉴_입력_중복_메뉴_입력_검증() {
         assertSimpleTest(() -> {
-            runException("3" , "해산물파스타-2,해산물파스타-1");
+            runException("3", "해산물파스타-2,해산물파스타-1");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 메뉴_입력_메뉴에_있는지_검증() {
         assertSimpleTest(() -> {
-            runException("31" , "알리오올리오-2");
+            runException("31", "알리오올리오-2");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
@@ -147,14 +150,15 @@ class ApplicationTest extends NsTest {
     @Test
     void 메뉴와_개수_입력_형식_검증() {
         assertSimpleTest(() -> {
-            runException("31" , "해산물파스타_2");
+            runException("31", "해산물파스타_2");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
+
     @Test
     void 메뉴와_개수_입력_공백_검증() {
         assertSimpleTest(() -> {
-            runException("31" , " ");
+            runException("31", " ");
             assertThat(output()).contains("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         });
     }
@@ -173,13 +177,13 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(() -> {
             run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
             assertThat(output()).contains(
-                "<주문 메뉴>",
-                "<할인 전 총주문 금액>",
-                "<증정 메뉴>",
-                "<혜택 내역>",
-                "<총혜택 금액>",
-                "<할인 후 예상 결제 금액>",
-                "<12월 이벤트 배지>"
+                    "<주문 메뉴>",
+                    "<할인 전 총주문 금액>",
+                    "<증정 메뉴>",
+                    "<혜택 내역>",
+                    "<총혜택 금액>",
+                    "<할인 후 예상 결제 금액>",
+                    "<12월 이벤트 배지>"
             );
         });
     }

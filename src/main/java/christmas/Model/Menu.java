@@ -14,7 +14,7 @@ public enum Menu {
     ZERO_COLA(3000, 0, "제로콜라"),
     RED_WINE(60000, 0, "레드와인"),
     CHAMPAGNE(25000, 0, "샴페인"),
-    NONE(0,0,"없음");
+    NONE(0, 0, "없음");
 
     private final Integer price;
     private Integer count;
@@ -28,7 +28,7 @@ public enum Menu {
 
     public static Menu getMenu(String name) {
         for (Menu menu : Menu.values()) {
-            if(menu.getName().equals(name)){
+            if (menu.getName().equals(name)) {
                 return menu;
             }
         }
@@ -53,15 +53,14 @@ public enum Menu {
 
     public static Integer countLumpSumBeforeDiscount() {
         Integer lumpSumBeforeDiscount = 0;
-        for(Menu menu : Menu.values()){
+        for (Menu menu : Menu.values()) {
             int count = menu.getCount();
-            if(count != 0){
+            if (count != 0) {
                 lumpSumBeforeDiscount = lumpSumBeforeDiscount + menu.getPrice() * menu.getCount();
             }
         }
         return lumpSumBeforeDiscount;
     }
-
 
 
 }

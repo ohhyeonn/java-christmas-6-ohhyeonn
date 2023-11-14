@@ -1,13 +1,14 @@
 package christmas.Constant;
 
 public class Constant {
+
     public static final String ERROR_VISIT_DATE_WRONG = "[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     public static final String ENTER_VISIT_DATE = "12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)";
     public static final String ENTER_MENUS = "주문하실 메뉴를 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)";
     public static final String ERROR_NOT_VALID_MENUS = "[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.";
     public static final Integer FIRST_INDEX = 0;
     public static final Integer SECOND_INDEX = 1;
-    public static final String REG_EXPRESS = "^[가-힣]+-[0-9]+$" ;
+    public static final String REG_EXPRESS = "^[가-힣]+-[0-9]+$";
     public static final Integer ZERO = 0;
     public static final Integer THIRTYTWO = 32;
     public static final Integer TWENTY = 20;

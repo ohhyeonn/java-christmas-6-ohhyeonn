@@ -5,6 +5,7 @@ import christmas.Model.Receipt;
 import christmas.Constant.Constant;
 
 public class InputView {
+
     private static InputValidator validator = new InputValidator();
 
     private static Integer readDate() {
@@ -51,8 +52,6 @@ public class InputView {
     }
 
 
-
-
     private static void printMenusInstruction() {
         System.out.println(Constant.ENTER_MENUS);
     }
@@ -65,8 +64,7 @@ public class InputView {
     }
 
 
-
     public static Receipt makeReceipt() {
-        return new Receipt(readDate() , readMenu());
+        return new Receipt(readDate(), readMenu());
     }
 }

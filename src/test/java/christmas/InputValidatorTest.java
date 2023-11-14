@@ -47,19 +47,16 @@ public class InputValidatorTest {
         String[] menusSets = "제로콜라-2,레드와인-3".split(",");
         InputValidator validator = new InputValidator();
 
-
         assertThatThrownBy(() -> {
             validator.validateOnlyDrinkMenu(menusSets);
         }).isInstanceOf(IllegalArgumentException.class);
 
     }
+
     @Test
     void validate20MenuTest() {
         InputValidator validator = new InputValidator();
         String[] menusSets = "해산물파스타-21".split(",");
-
-
-
 
         assertThatThrownBy(() -> {
             validator.validate20Menu(menusSets);
@@ -70,7 +67,6 @@ public class InputValidatorTest {
     void validateLineTest() {
         String line = "";
         InputValidator validator = new InputValidator();
-
 
         assertThatThrownBy(() -> {
             validator.validateLine(line);
