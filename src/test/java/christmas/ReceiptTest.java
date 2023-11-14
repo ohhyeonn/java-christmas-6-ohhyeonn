@@ -70,4 +70,18 @@ public class ReceiptTest {
         assertThat(christmasDiscount).isEqualTo(-2800);
     }
 
+
+    @Test
+    void weekDayDiscountTest() {
+        Receipt receipt = new Receipt(21 , "바비큐립-2,레드와인-2,아이스크림-2".split(","));
+
+        // 12/21 목요일 (평일)
+        // 디저트메뉴 아이스크림 2개 할인 4046원
+        int weekDayDiscount = receipt.getWeekDayDiscount();
+
+        assertThat(weekDayDiscount).isEqualTo(-4046);
+    }
+
+
+
 }
