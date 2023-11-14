@@ -1,5 +1,6 @@
 package christmas.View;
 
+import christmas.Model.Badge;
 import christmas.Model.Menu;
 import christmas.Model.Receipt;
 
@@ -51,14 +52,14 @@ public class OutputView {
     public static void printLumpSumBeforeDiscount(Receipt receipt) {
         System.out.println();
         System.out.println(LUMP_SUM_BEFORE_DISCOUNT);
-        System.out.printf(SUM_FORMAT, receipt.getLumpSumBeforeDiscount());
+        System.out.printf(SUM_FORMAT, Menu.countLumpSumBeforeDiscount());
     }
 
     public static void printGiftMenu(Receipt receipt) {
         System.out.println();
         System.out.println(GIFT_MENU);
-        if(receipt.getGiftMenuCount() > ZERO){
-            System.out.println(CHAMPAGNE+receipt.getGiftMenuCount()+COUNT);
+        if(receipt.countGiftMenu() > ZERO){
+            System.out.println(CHAMPAGNE+receipt.countGiftMenu()+COUNT);
             return ;
         }
         System.out.println(NOTHING);
@@ -67,11 +68,11 @@ public class OutputView {
     public static void printBenefitsDetails(Receipt receipt) {
         printBenefitsList();
 
-        printChristmasDiscount(receipt.getChristmasDiscount());
-        printWeekDayDiscount(receipt.getWeekDayDiscount());
-        printWeekendDiscount(receipt.getWeekendDiscount());
-        printSpecialDiscount(receipt.getSpecialDiscount());
-        printGiftEvent(receipt.getGiftMenuCount());
+        printChristmasDiscount(receipt.countChristmasDiscount());
+        printWeekDayDiscount(receipt.countWeekDayDiscount());
+        printWeekendDiscount(receipt.countWeekendDiscount());
+        printSpecialDiscount(receipt.countSpecialDiscount());
+        printGiftEvent(receipt.countGiftMenu());
         printBenefitsNothing(receipt);
 
 
@@ -83,8 +84,8 @@ public class OutputView {
     }
 
     private static void printBenefitsNothing(Receipt receipt) {
-        if(receipt.getChristmasDiscount() == ZERO && receipt.getWeekDayDiscount() == ZERO && receipt.getWeekendDiscount() == ZERO && receipt.getSpecialDiscount()
-                == ZERO && receipt.getGiftMenuCount() == ZERO){
+        if(receipt.countChristmasDiscount() == ZERO && receipt.countWeekDayDiscount() == ZERO && receipt.countWeekendDiscount() == ZERO && receipt.countSpecialDiscount()
+                == ZERO && receipt.countGiftMenu() == ZERO){
             System.out.println(NOTHING);
         }
     }
@@ -122,8 +123,8 @@ public class OutputView {
     public static void printBenefitsDiscount(Receipt receipt) {
         System.out.println();
         System.out.println(BENEFITS_SUM_PRICE);
-        if(receipt.getBenefitsDiscount() < ZERO){
-            System.out.printf(SUM_FORMAT,receipt.getBenefitsDiscount());
+        if(receipt.countBenefitsDiscount() < ZERO){
+            System.out.printf(SUM_FORMAT,receipt.countBenefitsDiscount());
             return;
         }
         System.out.println(NOTHING);
@@ -132,12 +133,12 @@ public class OutputView {
     public static void printEstimatedPaymentAmountAfterDiscount(Receipt receipt) {
         System.out.println();
         System.out.println(ESTIMATED_PAYMENT_AMOUNT_AFTER_DISCOUNT);
-        System.out.printf(SUM_FORMAT, receipt.getEstimatedPaymentAmountAfterDiscount());
+        System.out.printf(SUM_FORMAT, receipt.countEstimatedPaymentAmountAfterDiscount());
     }
 
     public static void printBadge(Receipt receipt) {
         System.out.println();
         System.out.println(EVENT_BADGE);
-        System.out.println(receipt.getBadge().getName());
+        System.out.println(Badge.countBadge(receipt.countBenefitsDiscount()).getName());
     }
 }

@@ -7,41 +7,12 @@ import java.time.Period;
 public class Receipt {
     private Integer visitDate;
     private String[] menuSets;
-    private Integer lumpSumBeforeDiscount;
-    private Integer giftMenuCount ;
-    private Integer christmasDiscount;
-    private Integer weekDayDiscount;
-    private Integer weekendDiscount;
-    private Integer specialDiscount;
-    private Integer benefitsDiscount;
-    private Integer estimatedPaymentAmountAfterDiscount;
-    private Badge badge;
 
     public Receipt(Integer visitDate, String[] menuSets) {
         this.visitDate = visitDate;
         this.menuSets = menuSets;
         countMenu();
-        this.lumpSumBeforeDiscount = countLumpSumBeforeDiscount();
-        this.giftMenuCount = countGiftMenu();
-        this.christmasDiscount = countChristmasDiscount();
-        this.weekDayDiscount = countWeekDayDiscount();
-        this.weekendDiscount = countWeekendDiscount();
-        this.specialDiscount = countSpecialDiscount();
-        this.benefitsDiscount = countBenefitsDiscount();
-        this.estimatedPaymentAmountAfterDiscount = countEstimatedPaymentAmountAfterDiscount();
-        this.badge = countBadge();
     }
-    private Integer countLumpSumBeforeDiscount() {
-        Integer lumpSumBeforeDiscount = 0;
-        for(Menu menu : Menu.values()){
-            int count = menu.getCount();
-            if(count != 0){
-                lumpSumBeforeDiscount = lumpSumBeforeDiscount + menu.getPrice() * menu.getCount();
-            }
-        }
-        return lumpSumBeforeDiscount;
-    }
-
     private void countMenu() {
         for(String menuset : menuSets){
             String[] menuAndCount = menuset.split("-");
@@ -50,23 +21,18 @@ public class Receipt {
             Menu orderedMenu = Menu.getMenu(menu);
             orderedMenu.setCount(count);
         }
-
-
     }
 
-
-
-
-    private Integer countGiftMenu() {
-        if(this.lumpSumBeforeDiscount >= 120000){
+    public Integer countGiftMenu() {
+        if(Menu.countLumpSumBeforeDiscount() >= 120000){
             return 1;
         }
         return 0;
     }
 
 
-    private Integer countChristmasDiscount() {
-        if(isUnderTenThousands(this.lumpSumBeforeDiscount)){
+    public Integer countChristmasDiscount() {
+        if(isUnderTenThousands(Menu.countLumpSumBeforeDiscount())){
             return 0;
         }
         LocalDate christmasDate = LocalDate.of(2023,12,25);
@@ -84,8 +50,8 @@ public class Receipt {
     }
 
 
-    private Integer countWeekDayDiscount() {
-        if(isUnderTenThousands(lumpSumBeforeDiscount)){
+    public Integer countWeekDayDiscount() {
+        if(isUnderTenThousands(Menu.countLumpSumBeforeDiscount())){
             return 0;
         }
         boolean isWeekDay = isWeekDay(visitDate);
@@ -101,8 +67,8 @@ public class Receipt {
         return weekDayDiscount;
     }
 
-    private Integer countWeekendDiscount() {
-        if(isUnderTenThousands(lumpSumBeforeDiscount)){
+    public Integer countWeekendDiscount() {
+        if(isUnderTenThousands(Menu.countLumpSumBeforeDiscount())){
             return 0;
         }
         boolean isWeekDay = isWeekDay(visitDate);
@@ -118,8 +84,8 @@ public class Receipt {
         return weekendDiscount;
     }
 
-    private Integer countSpecialDiscount() {
-        if(isUnderTenThousands(lumpSumBeforeDiscount)){
+    public Integer countSpecialDiscount() {
+        if(isUnderTenThousands(Menu.countLumpSumBeforeDiscount())){
             return 0;
         }
         if(visitDate == 3 || visitDate == 10 || visitDate == 17 || visitDate == 24 || visitDate == 25 || visitDate == 31) return -1000;
@@ -141,72 +107,13 @@ public class Receipt {
         return isWeekDay;
     }
 
-    private Integer countBenefitsDiscount() {
-        return (giftMenuCount * -25000) + christmasDiscount + weekDayDiscount + weekendDiscount + specialDiscount;
+    public Integer countBenefitsDiscount() {
+        return (countGiftMenu() * -25000) + countChristmasDiscount() + countWeekDayDiscount() + countWeekendDiscount() + countSpecialDiscount();
     }
-    private Integer countEstimatedPaymentAmountAfterDiscount() {
-        return lumpSumBeforeDiscount + christmasDiscount + weekDayDiscount + weekendDiscount + specialDiscount;
+    public Integer countEstimatedPaymentAmountAfterDiscount() {
+        return Menu.countLumpSumBeforeDiscount() + countChristmasDiscount() + countWeekDayDiscount() + countWeekendDiscount() + countSpecialDiscount();
     }
-
-    private Badge countBadge() {
-        if(benefitsDiscount <= Badge.SANTA.getUnder()){
-            return Badge.SANTA;
-
-        }
-        if(benefitsDiscount <= Badge.TREE.getUnder()){
-            return Badge.TREE;
-
-        }
-        if(benefitsDiscount <= Badge.STAR.getUnder()){
-            return Badge.STAR;
-
-        }
-
-        return Badge.NONE;
-    }
-
-
-
-
-
-
     public Integer getVisitDate() {
         return visitDate;
-    }
-
-    public Integer getLumpSumBeforeDiscount() {
-        return lumpSumBeforeDiscount;
-    }
-
-    public Integer getGiftMenuCount() {
-        return giftMenuCount;
-    }
-
-    public Integer getChristmasDiscount() {
-        return christmasDiscount;
-    }
-
-    public Integer getWeekDayDiscount() {
-        return weekDayDiscount;
-    }
-
-    public Integer getWeekendDiscount() {
-        return weekendDiscount;
-    }
-
-    public Integer getSpecialDiscount() {
-        return specialDiscount;
-    }
-
-    public Integer getBenefitsDiscount() {
-        return benefitsDiscount;
-    }
-
-    public Integer getEstimatedPaymentAmountAfterDiscount() {
-        return estimatedPaymentAmountAfterDiscount;
-    }
-
-    public Badge getBadge() {
-        return badge;
     }
 }
