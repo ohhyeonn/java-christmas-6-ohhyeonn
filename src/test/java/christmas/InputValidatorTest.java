@@ -66,6 +66,15 @@ public class InputValidatorTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void validateLineTest() {
+        String line = "";
+        InputValidator validator = new InputValidator();
 
+
+        assertThatThrownBy(() -> {
+            validator.validateLine(line);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 
 }
