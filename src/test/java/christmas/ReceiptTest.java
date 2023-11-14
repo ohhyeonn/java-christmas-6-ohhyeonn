@@ -29,9 +29,21 @@ public class ReceiptTest {
     void visitDateTest() {
         Receipt receipt = new Receipt(12 , "해산물파스타-2,아이스크림-1".split(","));
 
+        // 방문일 12 일
         int visitDate = receipt.getVisitDate();
 
         assertThat(visitDate).isEqualTo(12);
+    }
+
+    @Test
+    void lumpSumBeforeDiscountTest() {
+        Receipt receipt = new Receipt(12 , "해산물파스타-2,아이스크림-2,제로콜라-2".split(","));
+
+        // 아이스크림2개 10000 , 해산물파스타2개 70000 , 제로콜라2개 6000
+        // 총 86000
+        int lumpSumBeforeDiscount = receipt.getLumpSumBeforeDiscount();
+
+        assertThat(lumpSumBeforeDiscount).isEqualTo(86000);
     }
 
 
