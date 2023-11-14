@@ -24,6 +24,7 @@ public class OutputView {
     private static final String BENEFITS_SUM_PRICE = "<총혜택 금액>";
     private static final String ESTIMATED_PAYMENT_AMOUNT_AFTER_DISCOUNT = "<할인 후 예상 결제 금액>";
     private static final String EVENT_BADGE = "<12월 이벤트 배지>";
+    private static final Integer ZERO = 0;
     public static void printIntro() {
         System.out.println(INTRO);
     }
@@ -34,7 +35,7 @@ public class OutputView {
         System.out.println(ORDERED_MENU);
         for(Menu menu : Menu.values()){
             int count = menu.getCount();
-            if(count != 0){
+            if(count != ZERO){
                 System.out.print(menu.getName()+BLANC);
                 System.out.println(count+COUNT);
             }
@@ -56,7 +57,7 @@ public class OutputView {
     public static void printGiftMenu(Receipt receipt) {
         System.out.println();
         System.out.println(GIFT_MENU);
-        if(receipt.getGiftMenuCount() > 0){
+        if(receipt.getGiftMenuCount() > ZERO){
             System.out.println(CHAMPAGNE+receipt.getGiftMenuCount()+COUNT);
             return ;
         }
@@ -82,38 +83,38 @@ public class OutputView {
     }
 
     private static void printBenefitsNothing(Receipt receipt) {
-        if(receipt.getChristmasDiscount() == 0 && receipt.getWeekDayDiscount() == 0 && receipt.getWeekendDiscount() == 0 && receipt.getSpecialDiscount()
-                == 0 && receipt.getGiftMenuCount() == 0){
+        if(receipt.getChristmasDiscount() == ZERO && receipt.getWeekDayDiscount() == ZERO && receipt.getWeekendDiscount() == ZERO && receipt.getSpecialDiscount()
+                == ZERO && receipt.getGiftMenuCount() == ZERO){
             System.out.println(NOTHING);
         }
     }
 
     private static void printGiftEvent(Integer giftMenuCount) {
-        if(giftMenuCount > 0){
+        if(giftMenuCount > ZERO){
             System.out.println(GIFT_EVENT_PRICE);
         }
     }
 
     private static void printSpecialDiscount(Integer specialDiscount) {
-        if(specialDiscount < 0){
+        if(specialDiscount < ZERO){
             System.out.printf(SPECIAL_DISCOUNT_FORMAT, specialDiscount);
         }
     }
 
     private static void printWeekendDiscount(Integer weekendDiscount) {
-        if(weekendDiscount < 0){
+        if(weekendDiscount < ZERO){
             System.out.printf(WEEKEND_DISCOUNT_FORMAT, weekendDiscount);
         }
     }
 
     private static void printWeekDayDiscount(Integer weekDayDiscount) {
-        if(weekDayDiscount < 0){
+        if(weekDayDiscount < ZERO){
             System.out.printf(WEEKDAY_DISCOUNT_FORMAT, weekDayDiscount);
         }
     }
 
     private static void printChristmasDiscount(Integer christmasDiscount) {
-        if(christmasDiscount < 0){
+        if(christmasDiscount < ZERO){
             System.out.printf(CHRISTMAS_D_DAY_DISCOUNT_FORMAT, christmasDiscount);
         }
     }
@@ -121,7 +122,7 @@ public class OutputView {
     public static void printBenefitsDiscount(Receipt receipt) {
         System.out.println();
         System.out.println(BENEFITS_SUM_PRICE);
-        if(receipt.getBenefitsDiscount() < 0){
+        if(receipt.getBenefitsDiscount() < ZERO){
             System.out.printf(SUM_FORMAT,receipt.getBenefitsDiscount());
             return;
         }
