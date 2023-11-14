@@ -40,4 +40,21 @@ public class InputValidatorTest {
         }).isInstanceOf(IllegalArgumentException.class);
 
     }
+
+
+    @Test
+    void validateOnlyDrinkMenuTest() {
+        String[] menusSets = "제로콜라-2,레드와인-3".split(",");
+        InputValidator validator = new InputValidator();
+
+
+        assertThatThrownBy(() -> {
+            validator.validateOnlyDrinkMenu(menusSets);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+    }
+
+
+
+
 }
