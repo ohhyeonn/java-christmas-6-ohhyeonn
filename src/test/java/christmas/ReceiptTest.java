@@ -119,4 +119,15 @@ public class ReceiptTest {
         assertThat(benefitsDiscount).isEqualTo(-31746);
     }
 
+
+    @Test
+    void estimatedPaymentAmountAfterDiscountTest() {
+        Receipt receipt = new Receipt(3 , "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
+
+        // 12/3 일요일
+        int estimatedPaymentAmountAfterDiscount = receipt.getEstimatedPaymentAmountAfterDiscount();
+
+        assertThat(estimatedPaymentAmountAfterDiscount).isEqualTo(135754);
+    }
+
 }
