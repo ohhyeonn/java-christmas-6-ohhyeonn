@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.Model.Badge;
 import christmas.Model.Menu;
 import christmas.Model.Receipt;
 import org.junit.jupiter.api.BeforeEach;
@@ -130,4 +131,20 @@ public class ReceiptTest {
         assertThat(estimatedPaymentAmountAfterDiscount).isEqualTo(135754);
     }
 
+
+
+
+    @Test
+    void badgeTest() {
+        Receipt receipt = new Receipt(29 , "크리스마스파스타-3,바비큐립-1,초코케이크-1,제로콜라-3".split(","));
+
+        // 12/29 금요일 주말
+        // 주말할인 메인메뉴 4개 8092원
+        // 샴페인 증정 1개 25000원
+        // 총혜택 33092원
+        // 20000원 이상 산타
+        Badge badge = receipt.getBadge();
+
+        assertThat(badge).isEqualTo(Badge.SANTA);
+    }
 }
