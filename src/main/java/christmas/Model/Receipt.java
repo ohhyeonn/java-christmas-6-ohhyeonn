@@ -1,10 +1,12 @@
 package christmas.Model;
 
+import christmas.Constant.Constant;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Period;
 
 public class Receipt {
+
     private Integer visitDate;
     private String[] menuSets;
 
@@ -16,52 +18,52 @@ public class Receipt {
     private void countMenu() {
         for(String menuset : menuSets){
             String[] menuAndCount = menuset.split("-");
-            String menu = menuAndCount[0];
-            int count = Integer.parseInt(menuAndCount[1]);
+            String menu = menuAndCount[Constant.FIRST_INDEX];
+            int count = Integer.parseInt(menuAndCount[Constant.SECOND_INDEX]);
             Menu orderedMenu = Menu.getMenu(menu);
             orderedMenu.setCount(count);
         }
     }
 
     public Integer countGiftMenu() {
-        if(Menu.countLumpSumBeforeDiscount() >= 120000){
-            return 1;
+        if(Menu.countLumpSumBeforeDiscount() >= Constant.HUNDRED_TWENTY_THOUSAND){
+            return Constant.ONE;
         }
-        return 0;
+        return Constant.ZERO;
     }
 
 
     public Integer countChristmasDiscount() {
         if(isUnderTenThousands(Menu.countLumpSumBeforeDiscount())){
-            return 0;
+            return Constant.ZERO;
         }
-        LocalDate christmasDate = LocalDate.of(2023,12,25);
-        LocalDate visitDate = LocalDate.of(2023,12,this.visitDate);
+        LocalDate christmasDate = LocalDate.of(Constant.TWO_THOUSAND_TWENTY_THREE,Constant.TWELVE,Constant.TWENTY_FIVE);
+        LocalDate visitDate = LocalDate.of(Constant.TWO_THOUSAND_TWENTY_THREE,Constant.TWELVE,this.visitDate);
         Period diff = Period.between(visitDate , christmasDate);
         return calculateChristmasDiscount(diff.getDays());
     }
 
     private static Integer calculateChristmasDiscount(int days) {
-        if(days >= 0){
-            int totalDiscount = -3400;
-            return totalDiscount + 100 * days;
+        if(days >= Constant.ZERO){
+            int totalDiscount = Constant.MINUS_THREE_THOUSAND_FOUR_HUNDRED;
+            return totalDiscount + Constant.ONE_HUNDRED * days;
         }
-        return 0;
+        return Constant.ZERO;
     }
 
 
     public Integer countWeekDayDiscount() {
         if(isUnderTenThousands(Menu.countLumpSumBeforeDiscount())){
-            return 0;
+            return Constant.ZERO;
         }
         boolean isWeekDay = isWeekDay(visitDate);
         if(!isWeekDay){
-            return 0;
+            return Constant.ZERO;
         }
-        Integer weekDayDiscount = 0;
+        Integer weekDayDiscount = Constant.ZERO;
         for(Menu menu : Menu.values()){
             if(menu == Menu.CHOCOLATE_CAKE || menu == Menu.ICE_CREAM){
-                weekDayDiscount = weekDayDiscount - (2023 * menu.getCount());
+                weekDayDiscount = weekDayDiscount - (Constant.TWO_THOUSAND_TWENTY_THREE * menu.getCount());
             }
         }
         return weekDayDiscount;
@@ -69,16 +71,16 @@ public class Receipt {
 
     public Integer countWeekendDiscount() {
         if(isUnderTenThousands(Menu.countLumpSumBeforeDiscount())){
-            return 0;
+            return Constant.ZERO;
         }
         boolean isWeekDay = isWeekDay(visitDate);
         if(isWeekDay){
-            return 0;
+            return Constant.ZERO;
         }
-        Integer weekendDiscount = 0;
+        Integer weekendDiscount = Constant.ZERO;
         for(Menu menu : Menu.values()){
             if(menu == Menu.T_BONE_STEAK || menu == Menu.BBQ_RIBS || menu == Menu.SEAFOOD_PASTA || menu == Menu.CHRISTMAS_PASTA){
-                weekendDiscount = weekendDiscount - (2023 * menu.getCount());
+                weekendDiscount = weekendDiscount - (Constant.TWO_THOUSAND_TWENTY_THREE * menu.getCount());
             }
         }
         return weekendDiscount;
@@ -86,20 +88,20 @@ public class Receipt {
 
     public Integer countSpecialDiscount() {
         if(isUnderTenThousands(Menu.countLumpSumBeforeDiscount())){
-            return 0;
+            return Constant.ZERO;
         }
-        if(visitDate == 3 || visitDate == 10 || visitDate == 17 || visitDate == 24 || visitDate == 25 || visitDate == 31) return -1000;
-        return 0;
+        if(visitDate == Constant.THREE || visitDate == Constant.TEN || visitDate == Constant.SEVENTEEN || visitDate == Constant.TWENTY_FOUR || visitDate == Constant.TWENTY_FIVE || visitDate == Constant.THIRTY_ONE) return Constant.MINUS_ONE_THOUSAND;
+        return Constant.ZERO;
     }
 
 
     private static boolean isUnderTenThousands(Integer lumpSumBeforeDiscount) {
-        boolean isOverTenThousands = lumpSumBeforeDiscount < 10000;
+        boolean isOverTenThousands = lumpSumBeforeDiscount < Constant.TEN_THOUSAND;
         return isOverTenThousands;
     }
     private static boolean isWeekDay(Integer date) {
         boolean isWeekDay = false;
-        LocalDate visitDate = LocalDate.of(2023 , 12 , date);
+        LocalDate visitDate = LocalDate.of(Constant.TWO_THOUSAND_TWENTY_THREE , Constant.TWELVE , date);
         DayOfWeek dayOfWeek = visitDate.getDayOfWeek();
         if(dayOfWeek == DayOfWeek.SUNDAY || dayOfWeek == DayOfWeek.MONDAY || dayOfWeek == DayOfWeek.TUESDAY || dayOfWeek == DayOfWeek.WEDNESDAY || dayOfWeek == DayOfWeek.THURSDAY){
             isWeekDay = true;
@@ -108,7 +110,7 @@ public class Receipt {
     }
 
     public Integer countBenefitsDiscount() {
-        return (countGiftMenu() * -25000) + countChristmasDiscount() + countWeekDayDiscount() + countWeekendDiscount() + countSpecialDiscount();
+        return (countGiftMenu() * Constant.MINUS_TWENTY_FIVE_THOUSAND) + countChristmasDiscount() + countWeekDayDiscount() + countWeekendDiscount() + countSpecialDiscount();
     }
     public Integer countEstimatedPaymentAmountAfterDiscount() {
         return Menu.countLumpSumBeforeDiscount() + countChristmasDiscount() + countWeekDayDiscount() + countWeekendDiscount() + countSpecialDiscount();

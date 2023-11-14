@@ -34,4 +34,20 @@ public class Constant {
     public static final String BENEFITS_SUM_PRICE = "<총혜택 금액>";
     public static final String ESTIMATED_PAYMENT_AMOUNT_AFTER_DISCOUNT = "<할인 후 예상 결제 금액>";
     public static final String EVENT_BADGE = "<12월 이벤트 배지>";
+    public static final Integer HUNDRED_TWENTY_THOUSAND = 120000;
+    public static final Integer ONE = 1;
+    public static final Integer TWELVE = 12;
+    public static final Integer TWENTY_FIVE = 25;
+    public static final Integer THIRTY_ONE = 31;
+    public static final Integer TWO_THOUSAND_TWENTY_THREE = 2023;
+    public static final Integer MINUS_THREE_THOUSAND_FOUR_HUNDRED = -3400;
+    public static final Integer MINUS_ONE_THOUSAND = -1000;
+    public static final Integer TEN_THOUSAND = 10000;
+    public static final Integer MINUS_TWENTY_FIVE_THOUSAND = -25000;
+    public static final Integer ONE_HUNDRED = 100;
+    public static final Integer THREE = 3;
+    public static final Integer TEN = 10;
+    public static final Integer SEVENTEEN = 17;
+    public static final Integer TWENTY_FOUR = 24;
+
 }
