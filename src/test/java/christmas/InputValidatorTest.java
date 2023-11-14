@@ -1,16 +1,17 @@
 package christmas;
 
+
 import christmas.View.InputValidator;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputValidatorTest {
+
     @Test
     void validateVisitDateTest() {
         int date = 32;
         InputValidator validator = new InputValidator();
-
-
 
         assertThatThrownBy(() -> {
             validator.validateVisitDate(date);
@@ -18,4 +19,25 @@ public class InputValidatorTest {
 
     }
 
+    @Test
+    void validateMenuSetsTest() {
+        String[] menuSets = "abcd-1,해산물파스타-2".split(",");
+        InputValidator validator = new InputValidator();
+
+        assertThatThrownBy(() -> {
+            validator.validateMenuSets(menuSets);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+
+    @Test
+    void validateDuplicatedMenuTest() {
+        String[] menusSets = "해산물파스타-2,해산물파스타-1".split(",");
+        InputValidator validator = new InputValidator();
+
+        assertThatThrownBy(() -> {
+            validator.validateDuplicatedMenu(menusSets);
+        }).isInstanceOf(IllegalArgumentException.class);
+
+    }
 }
