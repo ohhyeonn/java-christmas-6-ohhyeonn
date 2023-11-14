@@ -93,4 +93,16 @@ public class ReceiptTest {
         assertThat(weekendDiscount).isEqualTo(-4046);
     }
 
+
+    @Test
+    void specialDiscountTest() {
+        Receipt receipt = new Receipt(24 , "바비큐립-1,아이스크림-2".split(","));
+
+        // 12/24 별표 표시 있음
+        // 1000원 할인
+        int specialDiscount = receipt.getSpecialDiscount();
+
+        assertThat(specialDiscount).isEqualTo(-1000);
+    }
+
 }
