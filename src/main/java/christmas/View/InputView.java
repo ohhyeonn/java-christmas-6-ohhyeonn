@@ -6,7 +6,7 @@ import christmas.Constant.Constant;
 
 public class InputView {
 
-    private static InputValidator validator = new InputValidator();
+    private final static InputValidator validator = new InputValidator();
 
     private static Integer readDate() {
         int date;
@@ -16,8 +16,6 @@ public class InputView {
                 date = getVisitDate();
                 validator.validateVisitDate(date);
                 break;
-            } catch (NumberFormatException e) {
-                System.out.println(Constant.ERROR_VISIT_DATE_WRONG);
             } catch (IllegalArgumentException e) {
                 System.out.println(Constant.ERROR_VISIT_DATE_WRONG);
             }
