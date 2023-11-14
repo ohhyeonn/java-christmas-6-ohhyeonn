@@ -82,6 +82,15 @@ public class ReceiptTest {
         assertThat(weekDayDiscount).isEqualTo(-4046);
     }
 
+    @Test
+    void weekendDiscountTest() {
+        Receipt receipt = new Receipt(22 , "해산물파스타-1,바비큐립-1,레드와인-2,아이스크림-2".split(","));
 
+        // 12/22 금요일 주말
+        // 메인메뉴 해산물파스타 1개 바비큐립 1개 할인
+        int weekendDiscount = receipt.getWeekendDiscount();
+
+        assertThat(weekendDiscount).isEqualTo(-4046);
+    }
 
 }
