@@ -41,11 +41,10 @@ public class Constant {
     public static final Integer TWENTY_FIVE = 25;
     public static final Integer THIRTY_ONE = 31;
     public static final Integer TWO_THOUSAND_TWENTY_THREE = 2023;
-    public static final Integer MINUS_THREE_THOUSAND_FOUR_HUNDRED = -3400;
     public static final Integer MINUS_ONE_THOUSAND = -1000;
     public static final Integer TEN_THOUSAND = 10000;
-    public static final Integer MINUS_TWENTY_FIVE_THOUSAND = -25000;
     public static final Integer ONE_HUNDRED = 100;
+    public static final Integer MINUS_TWENTY_FIVE_THOUSAND = -25000;
     public static final Integer THREE = 3;
     public static final Integer TEN = 10;
     public static final Integer SEVENTEEN = 17;
