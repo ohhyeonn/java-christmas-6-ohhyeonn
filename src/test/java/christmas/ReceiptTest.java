@@ -105,4 +105,18 @@ public class ReceiptTest {
         assertThat(specialDiscount).isEqualTo(-1000);
     }
 
+
+    @Test
+    void benefitsDiscountTest() {
+        Receipt receipt = new Receipt(18 , "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
+
+        // 12/18 월요일
+        // 크리스마스 디데이 할인: -2,700원
+        // 평일 할인: -4,046원
+        // 증정 이벤트: -25,000원
+        int benefitsDiscount = receipt.getBenefitsDiscount();
+
+        assertThat(benefitsDiscount).isEqualTo(-31746);
+    }
+
 }
