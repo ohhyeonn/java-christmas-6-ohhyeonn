@@ -42,7 +42,7 @@ public class ReceiptTest {
 
         // 아이스크림2개 10000 , 해산물파스타2개 70000 , 제로콜라2개 6000
         // 총 86000
-        int lumpSumBeforeDiscount = receipt.getLumpSumBeforeDiscount();
+        int lumpSumBeforeDiscount = Menu.countLumpSumBeforeDiscount();
 
         assertThat(lumpSumBeforeDiscount).isEqualTo(86000);
     }
@@ -53,7 +53,7 @@ public class ReceiptTest {
 
         // 아이스크림2개 10000 , 티본스테이크2개 110000 , 제로콜라2개 6000
         // 총 126000 -> 사은품 증정 1개
-        int giftMenuCount = receipt.getGiftMenuCount();
+        int giftMenuCount = receipt.countGiftMenu();
 
         assertThat(giftMenuCount).isEqualTo(1);
     }
@@ -66,7 +66,7 @@ public class ReceiptTest {
         Receipt receipt = new Receipt(19 , "크리스마스파스타-3,아이스크림-3".split(","));
 
         // 12/1 1000원할인 , 12/19 2800원할인
-        int christmasDiscount = receipt.getChristmasDiscount();
+        int christmasDiscount = receipt.countChristmasDiscount();
 
         assertThat(christmasDiscount).isEqualTo(-2800);
     }
@@ -78,7 +78,7 @@ public class ReceiptTest {
 
         // 12/21 목요일 (평일)
         // 디저트메뉴 아이스크림 2개 할인 4046원
-        int weekDayDiscount = receipt.getWeekDayDiscount();
+        int weekDayDiscount = receipt.countWeekDayDiscount();
 
         assertThat(weekDayDiscount).isEqualTo(-4046);
     }
@@ -89,7 +89,7 @@ public class ReceiptTest {
 
         // 12/22 금요일 주말
         // 메인메뉴 해산물파스타 1개 바비큐립 1개 할인
-        int weekendDiscount = receipt.getWeekendDiscount();
+        int weekendDiscount = receipt.countWeekendDiscount();
 
         assertThat(weekendDiscount).isEqualTo(-4046);
     }
@@ -101,7 +101,7 @@ public class ReceiptTest {
 
         // 12/24 별표 표시 있음
         // 1000원 할인
-        int specialDiscount = receipt.getSpecialDiscount();
+        int specialDiscount = receipt.countSpecialDiscount();
 
         assertThat(specialDiscount).isEqualTo(-1000);
     }
@@ -115,7 +115,7 @@ public class ReceiptTest {
         // 크리스마스 디데이 할인: -2,700원
         // 평일 할인: -4,046원
         // 증정 이벤트: -25,000원
-        int benefitsDiscount = receipt.getBenefitsDiscount();
+        int benefitsDiscount = receipt.countBenefitsDiscount();
 
         assertThat(benefitsDiscount).isEqualTo(-31746);
     }
@@ -126,7 +126,7 @@ public class ReceiptTest {
         Receipt receipt = new Receipt(3 , "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
 
         // 12/3 일요일
-        int estimatedPaymentAmountAfterDiscount = receipt.getEstimatedPaymentAmountAfterDiscount();
+        int estimatedPaymentAmountAfterDiscount = receipt.countEstimatedPaymentAmountAfterDiscount();
 
         assertThat(estimatedPaymentAmountAfterDiscount).isEqualTo(135754);
     }
@@ -136,14 +136,10 @@ public class ReceiptTest {
 
     @Test
     void badgeTest() {
-        Receipt receipt = new Receipt(29 , "크리스마스파스타-3,바비큐립-1,초코케이크-1,제로콜라-3".split(","));
+        Integer benefitDiscount = -20000;
 
-        // 12/29 금요일 주말
-        // 주말할인 메인메뉴 4개 8092원
-        // 샴페인 증정 1개 25000원
-        // 총혜택 33092원
         // 20000원 이상 산타
-        Badge badge = receipt.getBadge();
+        Badge badge = Badge.countBadge(benefitDiscount);
 
         assertThat(badge).isEqualTo(Badge.SANTA);
     }
