@@ -1,9 +1,7 @@
 package christmas.View;
 
-import christmas.Model.Badge;
-import christmas.Model.Discount;
 import christmas.Model.Menu;
-import java.util.HashMap;
+import christmas.Model.Receipt;
 
 public class OutputView {
     private static final String INTRO = "안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.";
@@ -45,35 +43,35 @@ public class OutputView {
 
     }
 
-    public static void printEventIntro(Integer date) {
-        System.out.println(DECEMBER+date+EVENT_INTRO );
+    public static void printEventIntro(Receipt receipt) {
+        System.out.println(DECEMBER+ receipt.getVisitDate()+EVENT_INTRO );
     }
 
-    public static void printLumpSumBeforeDiscount(Integer lumpSumBeforeDiscount) {
+    public static void printLumpSumBeforeDiscount(Receipt receipt) {
         System.out.println();
         System.out.println(LUMP_SUM_BEFORE_DISCOUNT);
-        System.out.printf(SUM_FORMAT,lumpSumBeforeDiscount);
+        System.out.printf(SUM_FORMAT, receipt.getLumpSumBeforeDiscount());
     }
 
-    public static void printGiftMenu(Integer giftMenuCount) {
+    public static void printGiftMenu(Receipt receipt) {
         System.out.println();
         System.out.println(GIFT_MENU);
-        if(giftMenuCount > 0){
-            System.out.println(CHAMPAGNE+giftMenuCount+COUNT);
+        if(receipt.getGiftMenuCount() > 0){
+            System.out.println(CHAMPAGNE+receipt.getGiftMenuCount()+COUNT);
             return ;
         }
         System.out.println(NOTHING);
     }
 
-    public static void printBenefitsDetails(HashMap<Discount , Integer> discounts) {
+    public static void printBenefitsDetails(Receipt receipt) {
         printBenefitsList();
 
-        printChristmasDiscount(discounts.get(Discount.CHRISTMAS_DISCOUNT));
-        printWeekDayDiscount(discounts.get(Discount.WEEK_DAY_DISCOUNT));
-        printWeekendDiscount(discounts.get(Discount.WEEKEND_DISCOUNT));
-        printSpecialDiscount(discounts.get(Discount.SPECIAL_DISCOUNT));
-        printGiftEvent(discounts.get(Discount.GIFT_MENU_COUNT));
-        printBenefitsNothing(discounts);
+        printChristmasDiscount(receipt.getChristmasDiscount());
+        printWeekDayDiscount(receipt.getWeekDayDiscount());
+        printWeekendDiscount(receipt.getWeekendDiscount());
+        printSpecialDiscount(receipt.getSpecialDiscount());
+        printGiftEvent(receipt.getGiftMenuCount());
+        printBenefitsNothing(receipt);
 
 
     }
@@ -83,9 +81,9 @@ public class OutputView {
         System.out.println(BENEFITS_LIST);
     }
 
-    private static void printBenefitsNothing(HashMap<Discount , Integer> discounts) {
-        if(discounts.get(Discount.CHRISTMAS_DISCOUNT) == 0 && discounts.get(Discount.WEEK_DAY_DISCOUNT) == 0 && discounts.get(Discount.WEEKEND_DISCOUNT) == 0 && discounts.get(Discount.SPECIAL_DISCOUNT)
-                == 0 && discounts.get(Discount.GIFT_MENU_COUNT) == 0){
+    private static void printBenefitsNothing(Receipt receipt) {
+        if(receipt.getChristmasDiscount() == 0 && receipt.getWeekDayDiscount() == 0 && receipt.getWeekendDiscount() == 0 && receipt.getSpecialDiscount()
+                == 0 && receipt.getGiftMenuCount() == 0){
             System.out.println(NOTHING);
         }
     }
@@ -120,25 +118,25 @@ public class OutputView {
         }
     }
 
-    public static void printBenefitsDiscount(Integer benefitsDiscount) {
+    public static void printBenefitsDiscount(Receipt receipt) {
         System.out.println();
         System.out.println(BENEFITS_SUM_PRICE);
-        if(benefitsDiscount < 0){
-            System.out.printf(SUM_FORMAT,benefitsDiscount);
+        if(receipt.getBenefitsDiscount() < 0){
+            System.out.printf(SUM_FORMAT,receipt.getBenefitsDiscount());
             return;
         }
         System.out.println(NOTHING);
     }
 
-    public static void printEstimatedPaymentAmountAfterDiscount(Integer estimatedPaymentAmountAfterDiscount) {
+    public static void printEstimatedPaymentAmountAfterDiscount(Receipt receipt) {
         System.out.println();
         System.out.println(ESTIMATED_PAYMENT_AMOUNT_AFTER_DISCOUNT);
-        System.out.printf(SUM_FORMAT, estimatedPaymentAmountAfterDiscount);
+        System.out.printf(SUM_FORMAT, receipt.getEstimatedPaymentAmountAfterDiscount());
     }
 
-    public static void printBadge(Badge badge) {
+    public static void printBadge(Receipt receipt) {
         System.out.println();
         System.out.println(EVENT_BADGE);
-        System.out.println(badge.getName());
+        System.out.println(receipt.getBadge().getName());
     }
 }
