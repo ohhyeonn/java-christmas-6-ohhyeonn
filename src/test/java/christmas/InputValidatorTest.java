@@ -53,7 +53,18 @@ public class InputValidatorTest {
         }).isInstanceOf(IllegalArgumentException.class);
 
     }
+    @Test
+    void validate20MenuTest() {
+        InputValidator validator = new InputValidator();
+        String[] menusSets = "해산물파스타-21".split(",");
 
+
+
+
+        assertThatThrownBy(() -> {
+            validator.validate20Menu(menusSets);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
 
 
 
