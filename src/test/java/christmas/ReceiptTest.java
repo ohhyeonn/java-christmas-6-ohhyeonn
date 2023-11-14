@@ -57,4 +57,17 @@ public class ReceiptTest {
         assertThat(giftMenuCount).isEqualTo(1);
     }
 
+
+
+
+    @Test
+    void christmasDiscountTest() {
+        Receipt receipt = new Receipt(19 , "크리스마스파스타-3,아이스크림-3".split(","));
+
+        // 12/1 1000원할인 , 12/19 2800원할인
+        int christmasDiscount = receipt.getChristmasDiscount();
+
+        assertThat(christmasDiscount).isEqualTo(-2800);
+    }
+
 }
