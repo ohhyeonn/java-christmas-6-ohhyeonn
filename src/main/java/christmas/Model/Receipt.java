@@ -43,7 +43,7 @@ public class Receipt {
     private static Integer calculateChristmasDiscount(int days) {
         if (days < 26) {
             int totalDiscount = Constant.MINUS_ONE_THOUSAND;
-            return totalDiscount - Constant.ONE_HUNDRED * (days-Constant.ONE);
+            return totalDiscount - Constant.ONE_HUNDRED * (days - Constant.ONE);
         }
         return Constant.ZERO;
     }
@@ -92,11 +92,10 @@ public class Receipt {
         if (isUnderTenThousands(Menu.countLumpSumBeforeDiscount())) {
             return Constant.ZERO;
         }
-
-        if (visitDate == Constant.THREE || visitDate == Constant.TEN
-                || visitDate == Constant.SEVENTEEN || visitDate == Constant.TWENTY_FOUR
-                || visitDate == Constant.TWENTY_FIVE || visitDate == Constant.THIRTY_ONE) {
-            return Constant.MINUS_ONE_THOUSAND;
+        for (SpecialDate specialDate : SpecialDate.values()) {
+            if (specialDate.getDate() == visitDate) {
+                return Constant.MINUS_ONE_THOUSAND;
+            }
         }
         return Constant.ZERO;
     }
