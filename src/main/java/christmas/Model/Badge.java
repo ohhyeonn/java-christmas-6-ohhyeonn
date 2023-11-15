@@ -8,7 +8,7 @@ public enum Badge {
     NONE(0, "없음");
 
     private final Integer under;
-    private String name;
+    private final String name;
 
     private Badge(Integer under, String name) {
         this.under = under;
