@@ -3,12 +3,11 @@ package christmas.Model;
 import christmas.Constant.Constant;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.Period;
 
 public class Receipt {
 
-    private Integer visitDate;
-    private String[] menuSets;
+    private final Integer visitDate;
+    private final String[] menuSets;
 
     public Receipt(Integer visitDate, String[] menuSets) {
         this.visitDate = visitDate;
@@ -17,8 +16,8 @@ public class Receipt {
     }
 
     private void countMenu() {
-        for (String menuset : menuSets) {
-            String[] menuAndCount = menuset.split("-");
+        for (String menuSet : menuSets) {
+            String[] menuAndCount = menuSet.split(Constant.HYPHEN);
             String menu = menuAndCount[Constant.FIRST_INDEX];
             int count = Integer.parseInt(menuAndCount[Constant.SECOND_INDEX]);
             Menu orderedMenu = Menu.getMenu(menu);
@@ -38,18 +37,13 @@ public class Receipt {
         if (isUnderTenThousands(Menu.countLumpSumBeforeDiscount())) {
             return Constant.ZERO;
         }
-        LocalDate christmasDate = LocalDate.of(Constant.TWO_THOUSAND_TWENTY_THREE, Constant.TWELVE,
-                Constant.TWENTY_FIVE);
-        LocalDate visitDate = LocalDate.of(Constant.TWO_THOUSAND_TWENTY_THREE, Constant.TWELVE,
-                this.visitDate);
-        Period diff = Period.between(visitDate, christmasDate);
-        return calculateChristmasDiscount(diff.getDays());
+        return calculateChristmasDiscount(this.visitDate);
     }
 
     private static Integer calculateChristmasDiscount(int days) {
-        if (days >= Constant.ZERO) {
-            int totalDiscount = Constant.MINUS_THREE_THOUSAND_FOUR_HUNDRED;
-            return totalDiscount + Constant.ONE_HUNDRED * days;
+        if (days < 26) {
+            int totalDiscount = Constant.MINUS_ONE_THOUSAND;
+            return totalDiscount - Constant.ONE_HUNDRED * (days-Constant.ONE);
         }
         return Constant.ZERO;
     }
@@ -59,6 +53,7 @@ public class Receipt {
         if (isUnderTenThousands(Menu.countLumpSumBeforeDiscount())) {
             return Constant.ZERO;
         }
+
         boolean isWeekDay = isWeekDay(visitDate);
         if (!isWeekDay) {
             return Constant.ZERO;
@@ -77,6 +72,7 @@ public class Receipt {
         if (isUnderTenThousands(Menu.countLumpSumBeforeDiscount())) {
             return Constant.ZERO;
         }
+
         boolean isWeekDay = isWeekDay(visitDate);
         if (isWeekDay) {
             return Constant.ZERO;
@@ -96,6 +92,7 @@ public class Receipt {
         if (isUnderTenThousands(Menu.countLumpSumBeforeDiscount())) {
             return Constant.ZERO;
         }
+
         if (visitDate == Constant.THREE || visitDate == Constant.TEN
                 || visitDate == Constant.SEVENTEEN || visitDate == Constant.TWENTY_FOUR
                 || visitDate == Constant.TWENTY_FIVE || visitDate == Constant.THIRTY_ONE) {
