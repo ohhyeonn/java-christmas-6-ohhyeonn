@@ -29,10 +29,11 @@ public class ReceiptTest {
         Menu.RED_WINE.setCount(0);
         Menu.CHAMPAGNE.setCount(0);
     }
+
     @ParameterizedTest
     @DisplayName("방문일자 입력에 맞게 가져 오는지 테스트")
     @CsvSource({"12,12", "29,29", "1,1"})
-    void visitDateTest(String input , String expected) {
+    void visitDateTest(String input, String expected) {
         Receipt receipt = new Receipt(Integer.parseInt(input), "해산물파스타-2,아이스크림-1".split(","));
 
         int visitDate = receipt.getVisitDate();
@@ -42,8 +43,8 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("할인전 주문금액 올바른 계산으로 가져오는지 테스트")
-    @CsvSource(value = {"해산물파스타-2,아이스크림-2,제로콜라-2:86000" , "티본스테이크-3,제로콜라-3:174000"},delimiter = ':')
-    void lumpSumBeforeDiscountTest(String input , String expected) {
+    @CsvSource(value = {"해산물파스타-2,아이스크림-2,제로콜라-2:86000", "티본스테이크-3,제로콜라-3:174000"}, delimiter = ':')
+    void lumpSumBeforeDiscountTest(String input, String expected) {
         Receipt receipt = new Receipt(12, input.split(","));
 
         // 할인전 주문금액
@@ -54,8 +55,8 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("증정상품 12만원 경계로 잘 가져오는지 테스트")
-    @CsvSource(value = {"아이스크림-2,티본스테이크-2:1" , "티본스테이크-2,아이스크림-1:0"},delimiter = ':')
-    void giftMenuCountTest(String input , String expected) {
+    @CsvSource(value = {"아이스크림-2,티본스테이크-2:1", "티본스테이크-2,아이스크림-1:0"}, delimiter = ':')
+    void giftMenuCountTest(String input, String expected) {
         Receipt receipt = new Receipt(3, input.split(","));
 
         // 증정상품 갯수
@@ -67,8 +68,8 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("크리스마스 디데이 할인 맞게 계산하는지 테스트")
-    @CsvSource(value = {"19:-2800" , "5:-1400" , "26:0"},delimiter = ':')
-    void christmasDiscountTest(String input , String expected) {
+    @CsvSource(value = {"19:-2800", "5:-1400", "26:0"}, delimiter = ':')
+    void christmasDiscountTest(String input, String expected) {
         Receipt receipt = new Receipt(Integer.parseInt(input), "크리스마스파스타-3,아이스크림-3".split(","));
 
         // 크리스마스 할인
@@ -80,8 +81,9 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("평일 할인 맞게 계산하는지 테스트")
-    @CsvSource(value = {"바비큐립-2,레드와인-2,아이스크림-2:-4046" , "해산물파스타-1,아이스크림-1:-2023" , "크리스마스파스타-1,티본스테이크-1:0"},delimiter = ':')
-    void weekDayDiscountTest(String input , String expected) {
+    @CsvSource(value = {"바비큐립-2,레드와인-2,아이스크림-2:-4046", "해산물파스타-1,아이스크림-1:-2023",
+            "크리스마스파스타-1,티본스테이크-1:0"}, delimiter = ':')
+    void weekDayDiscountTest(String input, String expected) {
         Receipt receipt = new Receipt(21, input.split(","));
 
         // 12/21 목요일 (평일)
@@ -93,8 +95,9 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("주말 할인 맞게 계산하는지 테스트")
-    @CsvSource(value = {"바비큐립-1,레드와인-2,아이스크림-2:-2023" , "해산물파스타-1,바비큐립-1,레드와인-2,아이스크림-2:-4046" , "아이스크림-5:0"},delimiter = ':')
-    void weekendDiscountTest(String input , String expected) {
+    @CsvSource(value = {"바비큐립-1,레드와인-2,아이스크림-2:-2023", "해산물파스타-1,바비큐립-1,레드와인-2,아이스크림-2:-4046",
+            "아이스크림-5:0"}, delimiter = ':')
+    void weekendDiscountTest(String input, String expected) {
         Receipt receipt = new Receipt(22, input.split(","));
 
         // 12/22 금요일 주말
@@ -107,8 +110,8 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("특별 할인 맞게 계산하는지 테스트")
-    @CsvSource(value = {"24:-1000" , "7:0"},delimiter = ':')
-    void specialDiscountTest(String input , String expected) {
+    @CsvSource(value = {"24:-1000", "7:0"}, delimiter = ':')
+    void specialDiscountTest(String input, String expected) {
         Receipt receipt = new Receipt(Integer.parseInt(input), "바비큐립-1,아이스크림-2".split(","));
 
         // 특별 할인
@@ -120,8 +123,9 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("총헤택 금액 맞게 계산하는지 테스트")
-    @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:-31746" , "크리스마스파스타-2,해산물파스타-1,초코케이크-1:-4723"},delimiter = ':')
-    void benefitsDiscountTest(String input , String expected) {
+    @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:-31746",
+            "크리스마스파스타-2,해산물파스타-1,초코케이크-1:-4723"}, delimiter = ':')
+    void benefitsDiscountTest(String input, String expected) {
         Receipt receipt = new Receipt(18, input.split(","));
 
         // 12/18 월요일 평
@@ -134,8 +138,9 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("할인후 결제예상 금액 맞게 계산하는지 테스트")
-    @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:135754" , "크리스마스파스타-2,해산물파스타-1,초코케이크-1:95777"},delimiter = ':')
-    void estimatedPaymentAmountAfterDiscountTest(String input , String expected) {
+    @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:135754",
+            "크리스마스파스타-2,해산물파스타-1,초코케이크-1:95777"}, delimiter = ':')
+    void estimatedPaymentAmountAfterDiscountTest(String input, String expected) {
         Receipt receipt = new Receipt(3, input.split(","));
 
         // 12/3 일요일
@@ -147,8 +152,9 @@ public class ReceiptTest {
 
     @ParameterizedTest
     @DisplayName("뱃지 금액에따라 맞게 계산하는지 테스트")
-    @CsvSource(value = {"-20000:SANTA","-21000:SANTA","-19000:TREE","-10000:TREE","-9000:STAR","-5000:STAR","-4900:NONE","-500:NONE"},delimiter = ':')
-    void badgeTest(String input , String expected) {
+    @CsvSource(value = {"-20000:SANTA", "-21000:SANTA", "-19000:TREE", "-10000:TREE", "-9000:STAR",
+            "-5000:STAR", "-4900:NONE", "-500:NONE"}, delimiter = ':')
+    void badgeTest(String input, String expected) {
         Integer benefitDiscount = Integer.parseInt(input);
 
         // 20000원 이상 산타

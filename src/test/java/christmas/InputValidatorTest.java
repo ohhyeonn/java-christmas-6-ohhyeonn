@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class InputValidatorTest {
+
     private static final String COMMA = ",";
 
     @ParameterizedTest
@@ -27,7 +28,7 @@ public class InputValidatorTest {
 
     @ParameterizedTest
     @DisplayName("메뉴형식이 올바른지 확인")
-    @ValueSource(strings = {"abcd-1,해산물파스타-2", "아이스크림-1,asdf,해산물파스타-2","아이스크림-asd,해산물파스타-2"})
+    @ValueSource(strings = {"abcd-1,해산물파스타-2", "아이스크림-1,asdf,해산물파스타-2", "아이스크림-asd,해산물파스타-2"})
     void validateMenuSetsTest(String input) {
         String[] menuSets = input.split(COMMA);
         InputValidator validator = new InputValidator();
@@ -54,7 +55,7 @@ public class InputValidatorTest {
 
     @ParameterizedTest
     @DisplayName("음료만 주문하는지 확인")
-    @ValueSource(strings = {"제로콜라-2,레드와인-1", "샴페인-1" , "레드와인-1,샴페인-1,제로콜라-1"})
+    @ValueSource(strings = {"제로콜라-2,레드와인-1", "샴페인-1", "레드와인-1,샴페인-1,제로콜라-1"})
     void validateOnlyDrinkMenuTest(String input) {
         String[] menusSets = input.split(COMMA);
         InputValidator validator = new InputValidator();
@@ -67,7 +68,7 @@ public class InputValidatorTest {
 
     @ParameterizedTest
     @DisplayName("메뉴 주문이 20개가 넘는지 확인")
-    @ValueSource(strings = {"해산물파스타-21", "샴페인-11,아이스크림-10" , "티본스테이크-10,해산물파스타-5,아이스크림-6"})
+    @ValueSource(strings = {"해산물파스타-21", "샴페인-11,아이스크림-10", "티본스테이크-10,해산물파스타-5,아이스크림-6"})
     void validate20MenuTest(String input) {
         InputValidator validator = new InputValidator();
         String[] menusSets = input.split(COMMA);

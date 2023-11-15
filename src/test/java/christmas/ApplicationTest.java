@@ -35,8 +35,9 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("산타뱃지 출력 테스트")
-    @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:산타","초코케이크-5:트리","초코케이크-3:별","초코케이크-1:없음"},delimiter = ':')
-    void 산타뱃지_출력(String input , String expected) {
+    @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:산타", "초코케이크-5:트리", "초코케이크-3:별",
+            "초코케이크-1:없음"}, delimiter = ':')
+    void 산타뱃지_출력(String input, String expected) {
         assertSimpleTest(() -> {
             run("3", input);
             assertThat(output()).contains(
@@ -48,8 +49,9 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("할인후 예상 결제금액 출력 테스트")
-    @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:135,754원","해산물파스타-3,아이스크림-2:108,754원"},delimiter = ':')
-    void 할인후_예상_결제금액_출력(String input , String expected) {
+    @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:135,754원",
+            "해산물파스타-3,아이스크림-2:108,754원"}, delimiter = ':')
+    void 할인후_예상_결제금액_출력(String input, String expected) {
         assertSimpleTest(() -> {
             run("3", input);
             assertThat(output()).contains(
@@ -60,8 +62,9 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("총혜택 금액 출력 테스트")
-    @CsvSource(value = {"티본스테이크-2,아이스크림-4:-35,292원","티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:-31,246원"},delimiter = ':')
-    void 총혜택_금액_출력(String input , String expected) {
+    @CsvSource(value = {"티본스테이크-2,아이스크림-4:-35,292원",
+            "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:-31,246원"}, delimiter = ':')
+    void 총혜택_금액_출력(String input, String expected) {
         assertSimpleTest(() -> {
             run("3", input);
             assertThat(output()).contains(
@@ -85,8 +88,9 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("증정메뉴 출력 테스트")
-    @CsvSource(value = {"티본스테이크-2,아이스크림-4:샴페인 1개","바비큐립-1,초코케이크-2,제로콜라-1:없음" , "해산물파스타-5:샴페인 1개"},delimiter = ':')
-    void 증정메뉴_출력(String input , String expected) {
+    @CsvSource(value = {"티본스테이크-2,아이스크림-4:샴페인 1개", "바비큐립-1,초코케이크-2,제로콜라-1:없음",
+            "해산물파스타-5:샴페인 1개"}, delimiter = ':')
+    void 증정메뉴_출력(String input, String expected) {
         assertSimpleTest(() -> {
             run("3", input);
             assertThat(output()).contains(
@@ -97,8 +101,8 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("할인전 총 주문 금액 출력 테스트")
-    @CsvSource(value = {"티본스테이크-2,아이스크림-4:130,000원","해산물파스타-2:70,000원"},delimiter = ':')
-    void 할인전_총_주문금액_출력(String input , String expected) {
+    @CsvSource(value = {"티본스테이크-2,아이스크림-4:130,000원", "해산물파스타-2:70,000원"}, delimiter = ':')
+    void 할인전_총_주문금액_출력(String input, String expected) {
         assertSimpleTest(() -> {
             run("3", input);
             assertThat(output()).contains(
@@ -122,7 +126,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("메뉴 주문이 20개가 넘는지 확인")
-    @ValueSource(strings = {"해산물파스타-21", "샴페인-11,아이스크림-10" , "티본스테이크-10,해산물파스타-5,아이스크림-6"})
+    @ValueSource(strings = {"해산물파스타-21", "샴페인-11,아이스크림-10", "티본스테이크-10,해산물파스타-5,아이스크림-6"})
     void 개수_입력_총_메뉴의_주문이_20개를_넘는지_검증(String input) {
         assertSimpleTest(() -> {
             runException("3", input);
@@ -132,7 +136,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("개수 입력이 1이상의 숫자인지 검증")
-    @ValueSource(strings = {"해산물파스타-0", "샴페인--1" , "제로콜라-2,레드와인-0"})
+    @ValueSource(strings = {"해산물파스타-0", "샴페인--1", "제로콜라-2,레드와인-0"})
     void 개수_입력_1이상의_숫자인지_검증(String input) {
         assertSimpleTest(() -> {
             runException("3", input);
@@ -143,7 +147,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("메뉴 입력 음료만 입력 하였는지 검증")
-    @ValueSource(strings = {"제로콜라-2,레드와인-1", "샴페인-1" , "레드와인-1,샴페인-1,제로콜라-1"})
+    @ValueSource(strings = {"제로콜라-2,레드와인-1", "샴페인-1", "레드와인-1,샴페인-1,제로콜라-1"})
     void 메뉴_입력_음료만_입력_하였는지_검증(String input) {
         assertSimpleTest(() -> {
             runException("3", input);
@@ -173,7 +177,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("메뉴와 개수 입력 형식에 맞는지 검증")
-    @ValueSource(strings = {"해산물파스타_2", "해산물파스타--2" , "크리스마스파스타*3,바비큐립*2"})
+    @ValueSource(strings = {"해산물파스타_2", "해산물파스타--2", "크리스마스파스타*3,바비큐립*2"})
     void 메뉴와_개수_입력_형식_검증(String input) {
         assertSimpleTest(() -> {
             runException("31", input);
@@ -192,7 +196,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("방문날짜 입력 1에서 31인지 검증")
-    @ValueSource(strings = {"0", "32" , "99"})
+    @ValueSource(strings = {"0", "32", "99"})
     void 방문날짜_입력_1에서_31인지_검증(String input) {
         assertSimpleTest(() -> {
             runException(input);
@@ -219,7 +223,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("혜택 내역 없음 출력")
-    @ValueSource(strings = {"타파스-1,제로콜라-1","양송이수프-1,제로콜라-1"})
+    @ValueSource(strings = {"타파스-1,제로콜라-1", "양송이수프-1,제로콜라-1"})
     void 혜택_내역_없음_출력(String input) {
         assertSimpleTest(() -> {
             run("26", input);
@@ -229,7 +233,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("방문일자 숫자 아닌 입력 예외 테스트")
-    @ValueSource(strings = {"ㅁ" , "a" , " ", "-"})
+    @ValueSource(strings = {"ㅁ", "a", " ", "-"})
     void 날짜_예외_테스트(String input) {
         assertSimpleTest(() -> {
             runException(input);
@@ -239,7 +243,7 @@ class ApplicationTest extends NsTest {
 
     @ParameterizedTest
     @DisplayName("주문 예외 테스트")
-    @ValueSource(strings = {"ㅁ" , "a" , " ", "-" , "제로콜라-a"})
+    @ValueSource(strings = {"ㅁ", "a", " ", "-", "제로콜라-a"})
     void 주문_예외_테스트(String input) {
         assertSimpleTest(() -> {
             runException("3", input);
